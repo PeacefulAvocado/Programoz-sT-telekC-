@@ -1,0 +1,6 @@
+D:\Tóth Jónás 11.I\C#\menü-fr\bin\Debug\menü-fr.exe.config
+D:\Tóth Jónás 11.I\C#\menü-fr\bin\Debug\menü-fr.exe
+D:\Tóth Jónás 11.I\C#\menü-fr\bin\Debug\menü-fr.pdb
+D:\Tóth Jónás 11.I\C#\menü-fr\obj\Debug\menü-fr.csprojAssemblyReference.cache
+D:\Tóth Jónás 11.I\C#\menü-fr\obj\Debug\menü-fr.exe
+D:\Tóth Jónás 11.I\C#\menü-fr\obj\Debug\menü-fr.pdb
