@@ -4,3 +4,10 @@ D:\Tóth Jónás 11.I\C#\menü-fr\bin\Debug\menü-fr.pdb
 D:\Tóth Jónás 11.I\C#\menü-fr\obj\Debug\menü-fr.csprojAssemblyReference.cache
 D:\Tóth Jónás 11.I\C#\menü-fr\obj\Debug\menü-fr.exe
 D:\Tóth Jónás 11.I\C#\menü-fr\obj\Debug\menü-fr.pdb
+C:\Users\Joni\Source\Repos\Programoz-sT-telekC-\menü-fr\bin\Debug\menü-fr.exe.config
+C:\Users\Joni\Source\Repos\Programoz-sT-telekC-\menü-fr\bin\Debug\menü-fr.exe
+C:\Users\Joni\Source\Repos\Programoz-sT-telekC-\menü-fr\bin\Debug\menü-fr.pdb
+C:\Users\Joni\Source\Repos\Programoz-sT-telekC-\menü-fr\obj\Debug\menü-fr.csprojAssemblyReference.cache
+C:\Users\Joni\Source\Repos\Programoz-sT-telekC-\menü-fr\obj\Debug\menü-fr.csproj.CoreCompileInputs.cache
+C:\Users\Joni\Source\Repos\Programoz-sT-telekC-\menü-fr\obj\Debug\menü-fr.exe
+C:\Users\Joni\Source\Repos\Programoz-sT-telekC-\menü-fr\obj\Debug\menü-fr.pdb

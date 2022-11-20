@@ -30,28 +30,37 @@ namespace menü_fr
 		{
 			Console.Clear();
 			Console.WriteLine("SZia üdvözöllek a programban!");
-			Console.WriteLine("Menü \na.) Elemi Progtételek\nb.) Összett progtételek\nc.) Rendezések\nd.) Keresések");
-			Console.Write("[a,b,c,d]: ");
-			string valasztas = Console.ReadLine().Trim(' ');
-			switch(valasztas)
-			{
-				case "a":
-					ElemiAlmenu();
+			Console.WriteLine("Menü \n1] Elemi Progtételek\n2] Összett progtételek\n3] Rendezések\n4] Keresések");
+			
+            int valasztott = 1;
+            Action[] funcs = {ElemiAlmenu,OsszetettAlmenu,RendezesekAlmenu,KeresesekAlmenu};
+			while (true)
+	        {
+                var valasztas = Console.ReadKey(false).Key;
+                switch(valasztas)
+			    {
+				case ConsoleKey.UpArrow:
+					if (valasztott > 1)
+	                {
+                        valasztott -= 1;
+	                }
 					break;
-				case "b":
-					OsszetettAlmenu();
+				case ConsoleKey.DownArrow:
+					if (valasztott < 4)
+	                {
+                       valasztott += 1;
+	                }
 					break;
-				case "c":
-					RendezesekAlmenu();
-					break;
-				case "d":
-					KeresesekAlmenu();
-					break;
+                case ConsoleKey.Escape:
+                    Exit();
+                    break;
+                case ConsoleKey.Enter:
+                        funcs[valasztott-1]();
+                    break;
 				default:
-					InvalidInput();
-					Menu();
 					break;
-			}
+			    }
+	        }
 		}
 		static void InvalidInput()
 		{
@@ -223,7 +232,6 @@ namespace menü_fr
 					break;
 			}
 		}
-
 		static void MegszamolMinta() {
 			Console.Clear();
 			Console.WriteLine("Megszámolás mintaprogram");
@@ -260,7 +268,6 @@ namespace menü_fr
 			}
 
 		}
-
 		static int FuncMegszamol(string[] X, int N, string keresett) {
 			int DB = 0;
 			for(int i = 0; i < N; i++)
