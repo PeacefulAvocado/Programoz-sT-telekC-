@@ -242,7 +242,16 @@ namespace menü_fr
 					MaxMinta();
 					break;
 				case "2":
-					
+					Console.WriteLine("Adja meg az adathalmaz elérési útvonalát!");
+					string url = Console.ReadLine();
+					StreamReader file = new StreamReader(url);
+					string[] tomb_fromfile = file.ReadToEnd().Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+					Console.WriteLine("Íjron be egy adatot, a program megszámolja, hogy hányszor szerepel az előbbi adathalmazban");
+					string file_keresett = Console.ReadLine();
+					Console.WriteLine("A keresett elem ennyiszer szerepel: {0}", FuncMegszamol(tomb_fromfile, tomb_fromfile.Length, file_keresett));
+					file.Close();
+					Console.ReadKey();
+					MegszamolMinta();
 					break;
 				case "3":
 					Maximumkivalasztas();
@@ -294,6 +303,7 @@ namespace menü_fr
 					Metszet();
 					break;
 				case "3":
+
 					break;
 				case "4":
 					OsszetettAlmenu();

@@ -11,3 +11,10 @@ C:\Users\Joni\Source\Repos\Programoz-sT-telekC-\menü-fr\obj\Debug\menü-fr.cspr
 C:\Users\Joni\Source\Repos\Programoz-sT-telekC-\menü-fr\obj\Debug\menü-fr.csproj.CoreCompileInputs.cache
 C:\Users\Joni\Source\Repos\Programoz-sT-telekC-\menü-fr\obj\Debug\menü-fr.exe
 C:\Users\Joni\Source\Repos\Programoz-sT-telekC-\menü-fr\obj\Debug\menü-fr.pdb
+D:\Boronkay\programozás\Projekt2\menü-fr\bin\Debug\menü-fr.exe.config
+D:\Boronkay\programozás\Projekt2\menü-fr\bin\Debug\menü-fr.exe
+D:\Boronkay\programozás\Projekt2\menü-fr\bin\Debug\menü-fr.pdb
+D:\Boronkay\programozás\Projekt2\menü-fr\obj\Debug\menü-fr.csproj.AssemblyReference.cache
+D:\Boronkay\programozás\Projekt2\menü-fr\obj\Debug\menü-fr.csproj.CoreCompileInputs.cache
+D:\Boronkay\programozás\Projekt2\menü-fr\obj\Debug\menü-fr.exe
+D:\Boronkay\programozás\Projekt2\menü-fr\obj\Debug\menü-fr.pdb
