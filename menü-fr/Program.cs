@@ -303,7 +303,7 @@ namespace menü_fr
 					Metszet();
 					break;
 				case "3":
-
+					MetszetMinta();
 					break;
 				case "4":
 					OsszetettAlmenu();
@@ -317,6 +317,100 @@ namespace menü_fr
 					break;
 			}
 		}
+		static void MetszetMinta()
+		{
+			Console.Clear();
+			Console.WriteLine("Metszet mintaprogram");
+			Console.WriteLine("1] Adatok beírásból");
+			Console.WriteLine("2] Adatok fileból");
+			Console.WriteLine("3] Vissza");
+			Console.WriteLine("4] Kilépés");
+			string tovabb = Console.ReadLine().Trim(' ');
+			switch (tovabb)
+			{
+				case "1":
+					Console.WriteLine("Írja be az egyik tömb elemeit (szóközökkel elválasztva)");
+					string[] X_beker = Console.ReadLine().Split(' ');
+					int[] X = new int[X_beker.Length];
+					for (int i = 0; i < X_beker.Length; i++)
+					{
+						X[i] = Convert.ToInt32(X_beker[i]);
+					}
+					//
+					Console.WriteLine("Írja be a másik tömb elemeit (szóközökkel elválasztva)");
+					string[] Y_beker = Console.ReadLine().Split(' ');
+					int[] Y = new int[Y_beker.Length];
+					for (int i = 0; i < Y_beker.Length; i++)
+					{
+						Y[i] = Convert.ToInt32(Y_beker[i]);
+					}
+					//
+					FuncMetszet(X.Length, X, Y.Length, Y);
+					Console.ReadKey();
+					MetszetMinta();
+					break;
+				case "2":
+					Console.WriteLine("Adja meg az adathalmaz elérési útvonalát! (két halmaz elemei két sorban, szóközzel elválasztva)");
+					string url = Console.ReadLine();
+					StreamReader file = new StreamReader(url);
+					string[] tomb_fromfileX = file.ReadLine().Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+					int[] X_fromfile = new int[tomb_fromfileX.Length];
+					for (int i = 0; i < tomb_fromfileX.Length; i++)
+					{
+						X_fromfile[i] = Convert.ToInt32(tomb_fromfileX[i]);
+					}
+
+					//
+					string[] tomb_fromfileY = file.ReadLine().Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+					int[] Y_fromfile = new int[tomb_fromfileY.Length];
+					for (int i = 0; i < tomb_fromfileY.Length; i++)
+					{
+						Y_fromfile[i] = Convert.ToInt32(tomb_fromfileY[i]);
+					}
+					//
+					FuncMetszet(X_fromfile.Length, X_fromfile, Y_fromfile.Length, Y_fromfile);
+					file.Close();
+					Console.ReadKey();
+					MetszetMinta();
+					break;
+				case "3":
+					Metszet();
+					break;
+				case "4":
+					Exit();
+					break;
+				default:
+					InvalidInput();
+					MetszetMinta();
+					break;
+			}
+		}
+		static void FuncMetszet(int N, int[] X, int M, int[] Y)
+		{
+			int db = 0;
+			int[] Z = new int[N];
+			for (int i = 0; i < N; i++)
+			{
+				int j = 0;
+				while (j < M && X[i] != Y[j])
+				{
+					j++;
+
+				}
+				if (j < M)
+				{
+					Z[db] = X[i];
+					db++;
+				}
+			}
+			Console.WriteLine("A metszet elemei:");
+			for (int i = 0; i < db; i++)
+			{
+				Console.Write("{0}, ", Z[i]);
+			}
+			Console.WriteLine();
+		}
+
 		static void Kivalogatas() {
 			Console.Clear();
 			Console.WriteLine("Kiválogatás");
@@ -335,6 +429,7 @@ namespace menü_fr
 					Kivalogatas();
 					break;
 				case "3":
+					KivalogatasMinta();
 					break;
 				case "4":
 					OsszetettAlmenu();
@@ -347,6 +442,79 @@ namespace menü_fr
 					Kivalogatas();
 					break;
 			}
+		}
+		static void KivalogatasMinta()
+		{
+			Console.Clear();
+			Console.WriteLine("Kiválogatás mintaprogram");
+			Console.WriteLine("1] Adatok beírásból");
+			Console.WriteLine("2] Adatok fileból");
+			Console.WriteLine("3] Vissza");
+			Console.WriteLine("4] Kilépés");
+			string tovabb = Console.ReadLine().Trim(' ');
+			switch (tovabb)
+			{
+				case "1":
+					Console.WriteLine("Írjon be számokat (szóközökkel elválasztva), a program kiválogatja a 10-nél nagyobbakat");
+					string[] X_beker = Console.ReadLine().Split(' ');
+					int[] X = new int[X_beker.Length];
+					for (int i = 0; i < X_beker.Length; i++)
+					{
+						X[i] = Convert.ToInt32(X_beker[i]);
+					}
+					//
+					FuncKivalogatas(X.Length, X);
+					Console.ReadKey();
+					MetszetMinta();
+					break;
+				case "2":
+					Console.WriteLine("Adja meg az adathalmaz elérési útvonalát, a program kiválogatja a 10-nél nagyobbakat! (számok szóközökkel elválasztva)");
+					string url = Console.ReadLine();
+					StreamReader file = new StreamReader(url);
+					string[] tomb_fromfileX = file.ReadLine().Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+					int[] X_fromfile = new int[tomb_fromfileX.Length];
+					for (int i = 0; i < tomb_fromfileX.Length; i++)
+					{
+						X_fromfile[i] = Convert.ToInt32(tomb_fromfileX[i]);
+					}
+
+					//
+					FuncKivalogatas(X_fromfile.Length, X_fromfile);
+					file.Close();
+					Console.ReadKey();
+					KivalogatasMinta();
+					break;
+				case "3":
+					Kivalogatas();
+					break;
+				case "4":
+					Exit();
+					break;
+				default:
+					InvalidInput();
+					KivalogatasMinta();
+					break;
+			}
+		}
+		static void FuncKivalogatas(int N, int[] X)
+		{
+			int db = 0;
+			int[] Y = new int[N];
+			for (int i = 0; i < N; i++)
+			{
+				if (X[i] > 10)
+				{
+					Y[db] = X[i];
+					db++;
+				}
+			}
+			Console.WriteLine("10-nél nagyobb elemek: ");
+			for (int i = 0; i < db; i++)
+			{
+				Console.Write("{0}, ", Y[i]);
+			}
+			Console.WriteLine();
+
 		}
 		static void RendezesekAlmenu()
 		{
@@ -374,6 +542,7 @@ namespace menü_fr
 					Egyszerucseres();
 					break;
 				case "3":
+					EgyszerucseresMinta();
 					break;
 				case "4":
 					RendezesekAlmenu();
@@ -387,6 +556,82 @@ namespace menü_fr
 					break;
 			}
 		}
+		static void EgyszerucseresMinta()
+		{
+			Console.Clear();
+			Console.WriteLine("Egyszerű cserés rendezés mintaprogram");
+			Console.WriteLine("1] Adatok beírásból");
+			Console.WriteLine("2] Adatok fileból");
+			Console.WriteLine("3] Vissza");
+			Console.WriteLine("4] Kilépés");
+			string tovabb = Console.ReadLine().Trim(' ');
+			switch (tovabb)
+			{
+				case "1":
+					Console.WriteLine("Írjon be számokat (szóközökkel elválasztva), a program rendezi ezeket");
+					string[] X_beker = Console.ReadLine().Split(' ');
+					int[] X = new int[X_beker.Length];
+					for (int i = 0; i < X_beker.Length; i++)
+					{
+						X[i] = Convert.ToInt32(X_beker[i]);
+					}
+					//
+					FuncEgyszerucseres(X.Length, X);
+					Console.ReadKey();
+					MetszetMinta();
+					break;
+				case "2":
+					Console.WriteLine("Adja meg az adathalmaz elérési útvonalát, a program kiválogatja a 10-nél nagyobbakat! (számok szóközökkel elválasztva)");
+					string url = Console.ReadLine();
+					StreamReader file = new StreamReader(url);
+					string[] tomb_fromfileX = file.ReadLine().Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+					int[] X_fromfile = new int[tomb_fromfileX.Length];
+					for (int i = 0; i < tomb_fromfileX.Length; i++)
+					{
+						X_fromfile[i] = Convert.ToInt32(tomb_fromfileX[i]);
+					}
+
+					//
+					FuncEgyszerucseres(X_fromfile.Length, X_fromfile);
+					file.Close();
+					Console.ReadKey();
+					EgyszerucseresMinta();
+					break;
+				case "3":
+					Egyszerucseres();
+					break;
+				case "4":
+					Exit();
+					break;
+				default:
+					InvalidInput();
+					EgyszerucseresMinta();
+					break;
+			}
+
+		}
+		static void FuncEgyszerucseres(int N, int[] X)
+		{
+			for (int i = 0; i < N - 1; i++)
+			{
+				for (int j = i + 1; j < N; j++)
+				{
+					if (X[i] > X[j])
+					{
+						int cs = X[i];
+						X[i] = X[j];
+						X[j] = cs;
+					}
+				}
+			}
+			Console.WriteLine("A rendezett számsor: ");
+			for (int i = 0; i < N; i++)
+			{
+				Console.Write("{0}, ", X[i]);
+			}
+			Console.WriteLine();
+		}
+
 		static void Beillesztesesrendezes() {
 			Console.Clear();
 			Console.WriteLine("Javított beillesztéses rendezés");
@@ -405,6 +650,7 @@ namespace menü_fr
 					Beillesztesesrendezes();
 					break;
 				case "3":
+					BeillesztesesrendezesMinta();
 					break;
 				case "4":
 					RendezesekAlmenu();
@@ -417,6 +663,81 @@ namespace menü_fr
 					Beillesztesesrendezes();
 					break;
 			}
+		}
+		static void BeillesztesesrendezesMinta()
+		{
+			Console.Clear();
+			Console.WriteLine("javított beillesztéses rendezés mintaprogram");
+			Console.WriteLine("1] Adatok beírásból");
+			Console.WriteLine("2] Adatok fileból");
+			Console.WriteLine("3] Vissza");
+			Console.WriteLine("4] Kilépés");
+			string tovabb = Console.ReadLine().Trim(' ');
+			switch (tovabb)
+			{
+				case "1":
+					Console.WriteLine("Írjon be számokat (szóközökkel elválasztva), a program rendezi ezeket");
+					string[] X_beker = Console.ReadLine().Split(' ');
+					int[] X = new int[X_beker.Length];
+					for (int i = 0; i < X_beker.Length; i++)
+					{
+						X[i] = Convert.ToInt32(X_beker[i]);
+					}
+					//
+					FuncBeillesztesesrendezes(X.Length, X);
+					Console.ReadKey();
+					BeillesztesesrendezesMinta();
+					break;
+				case "2":
+					Console.WriteLine("Adja meg az adathalmaz elérési útvonalát, a program kiválogatja a 10-nél nagyobbakat! (számok szóközökkel elválasztva)");
+					string url = Console.ReadLine();
+					StreamReader file = new StreamReader(url);
+					string[] tomb_fromfileX = file.ReadLine().Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+					int[] X_fromfile = new int[tomb_fromfileX.Length];
+					for (int i = 0; i < tomb_fromfileX.Length; i++)
+					{
+						X_fromfile[i] = Convert.ToInt32(tomb_fromfileX[i]);
+					}
+
+					//
+					FuncBeillesztesesrendezes(X_fromfile.Length, X_fromfile);
+					file.Close();
+					Console.ReadKey();
+					BeillesztesesrendezesMinta();
+					break;
+				case "3":
+					Beillesztesesrendezes();
+					break;
+				case "4":
+					Exit();
+					break;
+				default:
+					InvalidInput();
+					BeillesztesesrendezesMinta();
+					break;
+			}
+
+		}
+		static void FuncBeillesztesesrendezes(int N, int[] X)
+		{
+			for (int i = 1; i < N; i++)
+			{
+				int j = i - 1;
+				int y = X[i];
+				while (j > 0 && X[j] > y)
+				{
+					X[j + 1] = X[j];
+					j--;
+				}
+				X[j + 1] = y;
+
+			}
+			Console.WriteLine("A rendezett számsor: ");
+			for (int i = 0; i < N; i++)
+			{
+				Console.Write("{0}, ", X[i]);
+			}
+			Console.WriteLine();
 		}
 		static void KeresesekAlmenu()
 		{
@@ -444,6 +765,7 @@ namespace menü_fr
 					Lineariskereses();
 					break;
 				case "3":
+					LineariskeresesMinta();
 					break;
 				case "4":
 					KeresesekAlmenu();
@@ -456,6 +778,78 @@ namespace menü_fr
 					Lineariskereses();
 					break;
 			}
+		}
+		static void LineariskeresesMinta()
+		{
+			Console.Clear();
+			Console.WriteLine("Lineáris keresés mintaprogram");
+			Console.WriteLine("1] Adatok beírásból");
+			Console.WriteLine("2] Adatok fileból");
+			Console.WriteLine("3] Vissza");
+			Console.WriteLine("4] Kilépés");
+			string tovabb = Console.ReadLine().Trim(' ');
+			switch (tovabb)
+			{
+				case "1":
+					Console.WriteLine("Írjon be számokat sorozatban (szóközökkel elválasztva)!");
+					string[] X_beker = Console.ReadLine().Split(' ');
+					int[] X = new int[X_beker.Length];
+					for (int i = 0; i < X_beker.Length; i++)
+					{
+						X[i] = Convert.ToInt32(X_beker[i]);
+					}
+					Console.WriteLine("Írjon be egy számot, a program megkeresei a sorozatban");
+					int keresett = Convert.ToInt32(Console.ReadLine());
+					//
+					FuncLineariskereses(X.Length, X, keresett);
+					Console.ReadKey();
+					LineariskeresesMinta();
+					break;
+				case "2":
+				//nincs kész
+				/*
+				Console.WriteLine("Adja meg a rendezett adathalmaz elérési útvonalát!");
+				string url = Console.ReadLine();
+				StreamReader file = new StreamReader(url);
+				string[] tomb_fromfileX = file.ReadLine().Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+				int[] X_fromfile = new int[tomb_fromfileX.Length];
+				for(int i = 0; i < tomb_fromfileX.Length; i++) {
+					X_fromfile[i] = Convert.ToInt32(tomb_fromfileX[i]);
+				}
+
+				//
+				//FuncLineariskereses(X_fromfile.Length, X_fromfile);
+				file.Close();
+				Console.ReadKey();
+				LineariskeresesMinta();
+				break;
+				*/
+				case "3":
+					Lineariskereses();
+					break;
+				case "4":
+					Exit();
+					break;
+				default:
+					InvalidInput();
+					LineariskeresesMinta();
+					break;
+			}
+		}
+		static void FuncLineariskereses(int N, int[] X, int Y)
+		{
+			int i = 0;
+			int sorsz = -1;
+			while (i < N && X[i] < Y)
+			{
+				i++;
+			}
+			bool van = (i <= N && X[i] == Y);
+			if (van)
+			{
+				sorsz = i;
+			}
+			Console.WriteLine("A keresett elem a {0}. helyen van", sorsz + 1);
 		}
 		static void Binariskereses() {
 			Console.Clear();
