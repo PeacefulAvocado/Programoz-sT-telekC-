@@ -898,5 +898,6 @@ namespace menü_fr
 			
 			
 		}
+		// timer a rendezésnél, keresésnél, dokumentáció, az eljárásokban a szövegek kicserélése, algoritmusok befejezése, menü színezése
 	}
 }
