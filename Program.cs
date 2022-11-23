@@ -942,6 +942,7 @@ namespace menü_fr
                 } while(line != null);
             }
             
+            
             System.Threading.Thread.Sleep(1000);
 			System.Environment.Exit(0);
 		}
