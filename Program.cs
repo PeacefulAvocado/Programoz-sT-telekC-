@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Threading;
 
 namespace menü_fr
 {
@@ -149,7 +150,7 @@ namespace menü_fr
 					{
 						X[i] = Convert.ToInt32(tomb[i]);
 					}
-					Console.WriteLine("A legnagyobb elem: {0}", FuncMaxKiv(X,X.Length));
+                    FuncMaxKiv(X, X.Length);
 					Console.ReadKey();
 					MaxMinta();
 					break;
@@ -163,7 +164,7 @@ namespace menü_fr
 					{
 						X_fromfile[i] = Convert.ToInt32(tomb_fromfile[i]);
 					}
-					Console.WriteLine("A legnagyobb elem: {0}", FuncMaxKiv(X_fromfile, X_fromfile.Length));
+                    FuncMaxKiv(X_fromfile, X_fromfile.Length);
 					file.Close();
 					Console.ReadKey();
 					MaxMinta();
@@ -180,7 +181,7 @@ namespace menü_fr
 					break;
 			}
 		}
-		static int FuncMaxKiv(int[] X, int N)
+		static void FuncMaxKiv(int[] X, int N)
 		{
 			int MAX = 0;
 			for(int I = 1; I < N; I++)
@@ -190,8 +191,8 @@ namespace menü_fr
 					MAX = I;
 				}
 			}
-			return X[MAX];
-		}
+            Console.WriteLine("A legnagyobb elem: {0}", MAX);
+        }
 		static void Megszamolas() {
 			Console.Clear();
 			Console.WriteLine("Megszámolás");
@@ -236,8 +237,8 @@ namespace menü_fr
 					string[] X = Console.ReadLine().Split(' ');
 					Console.WriteLine("Íjron be egy adatot, a program megszámolja, hogy hányszor szerepel az előbbi adathalmazban");
 					string keresett = Console.ReadLine();
-					
-					Console.WriteLine("A keresett elem ennyiszer szerepel: {0}", FuncMegszamol(X, X.Length, keresett));
+
+                    FuncMegszamol(X, X.Length, keresett);
 					Console.ReadKey();
 					MaxMinta();
 					break;
@@ -248,7 +249,7 @@ namespace menü_fr
 					string[] tomb_fromfile = file.ReadToEnd().Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 					Console.WriteLine("Íjron be egy adatot, a program megszámolja, hogy hányszor szerepel az előbbi adathalmazban");
 					string file_keresett = Console.ReadLine();
-					Console.WriteLine("A keresett elem ennyiszer szerepel: {0}", FuncMegszamol(tomb_fromfile, tomb_fromfile.Length, file_keresett));
+					FuncMegszamol(tomb_fromfile, tomb_fromfile.Length, file_keresett);
 					file.Close();
 					Console.ReadKey();
 					MegszamolMinta();
@@ -266,7 +267,7 @@ namespace menü_fr
 			}
 
 		}
-		static int FuncMegszamol(string[] X, int N, string keresett) {
+		static void FuncMegszamol(string[] X, int N, string keresett) {
 			int DB = 0;
 			for(int i = 0; i < N; i++)
 			{
@@ -275,8 +276,8 @@ namespace menü_fr
 					DB++;
 				}
 			}
-			return DB;
-		}
+            Console.WriteLine("A keresett elem ennyiszer szerepel: {0}", DB);
+        }
 		static void OsszetettAlmenu()
 		{
 			Console.Clear();
@@ -321,11 +322,8 @@ namespace menü_fr
 		{
 			Console.Clear();
 			Console.WriteLine("Metszet mintaprogram");
-			Console.WriteLine("1] Adatok beírásból");
-			Console.WriteLine("2] Adatok fileból");
-			Console.WriteLine("3] Vissza");
-			Console.WriteLine("4] Kilépés");
-			string tovabb = Console.ReadLine().Trim(' ');
+            printData("n");
+            string tovabb = Console.ReadLine().Trim(' ');
 			switch (tovabb)
 			{
 				case "1":
@@ -447,11 +445,8 @@ namespace menü_fr
 		{
 			Console.Clear();
 			Console.WriteLine("Kiválogatás mintaprogram");
-			Console.WriteLine("1] Adatok beírásból");
-			Console.WriteLine("2] Adatok fileból");
-			Console.WriteLine("3] Vissza");
-			Console.WriteLine("4] Kilépés");
-			string tovabb = Console.ReadLine().Trim(' ');
+            printData("n");
+            string tovabb = Console.ReadLine().Trim(' ');
 			switch (tovabb)
 			{
 				case "1":
@@ -560,11 +555,8 @@ namespace menü_fr
 		{
 			Console.Clear();
 			Console.WriteLine("Egyszerű cserés rendezés mintaprogram");
-			Console.WriteLine("1] Adatok beírásból");
-			Console.WriteLine("2] Adatok fileból");
-			Console.WriteLine("3] Vissza");
-			Console.WriteLine("4] Kilépés");
-			string tovabb = Console.ReadLine().Trim(' ');
+            printData("n");
+            string tovabb = Console.ReadLine().Trim(' ');
 			switch (tovabb)
 			{
 				case "1":
@@ -612,7 +604,9 @@ namespace menü_fr
 		}
 		static void FuncEgyszerucseres(int N, int[] X)
 		{
-			for (int i = 0; i < N - 1; i++)
+            DateTime start = DateTime.Now;
+
+            for (int i = 0; i < N - 1; i++)
 			{
 				for (int j = i + 1; j < N; j++)
 				{
@@ -624,12 +618,17 @@ namespace menü_fr
 					}
 				}
 			}
-			Console.WriteLine("A rendezett számsor: ");
+            DateTime end = DateTime.Now;
+            TimeSpan ts = (end - start);
+
+            Console.WriteLine("A rendezett számsor: ");
 			for (int i = 0; i < N; i++)
 			{
 				Console.Write("{0}, ", X[i]);
-			}
-			Console.WriteLine();
+                
+            }
+            Console.WriteLine("\nA rendezés {0} miliszekundum alatt ment végbe", ts.TotalMilliseconds);
+            Console.WriteLine();
 		}
 
 		static void Beillesztesesrendezes() {
@@ -668,11 +667,8 @@ namespace menü_fr
 		{
 			Console.Clear();
 			Console.WriteLine("javított beillesztéses rendezés mintaprogram");
-			Console.WriteLine("1] Adatok beírásból");
-			Console.WriteLine("2] Adatok fileból");
-			Console.WriteLine("3] Vissza");
-			Console.WriteLine("4] Kilépés");
-			string tovabb = Console.ReadLine().Trim(' ');
+            printData("n");
+            string tovabb = Console.ReadLine().Trim(' ');
 			switch (tovabb)
 			{
 				case "1":
@@ -720,7 +716,8 @@ namespace menü_fr
 		}
 		static void FuncBeillesztesesrendezes(int N, int[] X)
 		{
-			for (int i = 1; i < N; i++)
+            DateTime start = DateTime.Now;
+            for (int i = 1; i < N; i++)
 			{
 				int j = i - 1;
 				int y = X[i];
@@ -732,12 +729,15 @@ namespace menü_fr
 				X[j + 1] = y;
 
 			}
-			Console.WriteLine("A rendezett számsor: ");
+            DateTime end = DateTime.Now;
+            TimeSpan ts = (end - start);
+            Console.WriteLine("A rendezett számsor: ");
 			for (int i = 0; i < N; i++)
 			{
 				Console.Write("{0}, ", X[i]);
 			}
-			Console.WriteLine();
+            Console.WriteLine("\nA renezés {0} miliszekundum alatt ment végbe", ts.TotalMilliseconds);
+            Console.WriteLine();
 		}
 		static void KeresesekAlmenu()
 		{
@@ -783,11 +783,8 @@ namespace menü_fr
 		{
 			Console.Clear();
 			Console.WriteLine("Lineáris keresés mintaprogram");
-			Console.WriteLine("1] Adatok beírásból");
-			Console.WriteLine("2] Adatok fileból");
-			Console.WriteLine("3] Vissza");
-			Console.WriteLine("4] Kilépés");
-			string tovabb = Console.ReadLine().Trim(' ');
+            printData("n");
+            string tovabb = Console.ReadLine().Trim(' ');
 			switch (tovabb)
 			{
 				case "1":
@@ -838,25 +835,31 @@ namespace menü_fr
 		}
 		static void FuncLineariskereses(int N, int[] X, int Y)
 		{
-			int i = 0;
+            DateTime start = DateTime.Now;
+            
+            int i = 0;
 			int sorsz = -1;
 			while (i < N && X[i] < Y)
 			{
 				i++;
 			}
 			bool van = (i < N && X[i] == Y);
+            DateTime end = DateTime.Now;
             if(van)
             {
                 sorsz = i;
+                TimeSpan ts = (end - start);
+                Console.WriteLine("A keresett elem a {0}. helyen van", sorsz + 1);
+                Console.WriteLine("\nA keresés {0} miliszekundum alatt ment végbe", ts.TotalMilliseconds);
             } else
             {
                 Console.WriteLine("A keresett elem nincs a sorozatban");    
             }
-			Console.WriteLine("A keresett elem a {0}. helyen van", sorsz + 1);
+            
 		}
 		static void Binariskereses() {
 			Console.Clear();
-			Console.WriteLine("Bináris (logaritmikus) rendezés");
+			Console.WriteLine("Bináris (logaritmikus) keresés");
             printData("m");
             string tovabb = Console.ReadLine().Trim(' ');
 			switch(tovabb)
@@ -889,10 +892,7 @@ namespace menü_fr
         static void BinariskeresesMinta() {
             Console.Clear();
             Console.WriteLine("Bináris (logaritmikus) keresés mintaprogram");
-            Console.WriteLine("1] Adatok beírásból");
-            Console.WriteLine("2] Adatok fileból");
-            Console.WriteLine("3] Vissza");
-            Console.WriteLine("4] Kilépés");
+            printData("n");
             string tovabb = Console.ReadLine().Trim(' ');
             switch(tovabb)
             {
@@ -945,6 +945,8 @@ namespace menü_fr
         
         }
         static void FuncBinariskereses(int N, int[] X, int Y) {
+            DateTime start = DateTime.Now;
+        
             int e = 0, u = N-1, k, sorsz;
             do
             {
@@ -959,14 +961,18 @@ namespace menü_fr
             } while(e <= u && X[k] != Y);
 
             bool van = (e <= u);
+            DateTime end = DateTime.Now;
             if(van)
             {
                 sorsz = k;
-                Console.WriteLine("A keresett elem a {0}. helyen van", sorsz);
+                Console.WriteLine("A keresett elem a {0}. helyen van", sorsz + 1);
+                TimeSpan ts = (end - start);
+                Console.WriteLine("\nA keresés {0} miliszekundum alatt ment végbe", ts.TotalMilliseconds);
             } else
             {
                 Console.WriteLine("A keresett elem nincs a sorozatban");
             }
+            
             
         }
 		static void Exit()
@@ -985,6 +991,6 @@ namespace menü_fr
 			
 			
 		}
-		// timer a rendezésnél, keresésnél, dokumentáció, az eljárásokban a szövegek kicserélése, menü színezése
+		//  dokumentáció,  menü színezése
 	}
 }
