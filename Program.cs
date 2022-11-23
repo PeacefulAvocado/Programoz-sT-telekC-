@@ -907,9 +907,9 @@ namespace menü_fr
                     Console.WriteLine("Írjon be egy számot, a program megkeresei a sorozatban");
                     int keresett = Convert.ToInt32(Console.ReadLine());
                     //
-                    FuncLineariskereses(X.Length, X, keresett);
+                    FuncBinariskereses(X.Length, X, keresett);
                     Console.ReadKey();
-                    LineariskeresesMinta();
+                    BinariskeresesMinta();
                     break;
                 case "2":
                     //
@@ -926,26 +926,26 @@ namespace menü_fr
                     Console.WriteLine("Írjon be egy számot, a program megkeresei a sorozatban");
                     int keresett_file = Convert.ToInt32(Console.ReadLine());
 
-                    FuncLineariskereses(X_fromfile.Length, X_fromfile, keresett_file);
+                    FuncBinariskereses(X_fromfile.Length, X_fromfile, keresett_file);
                     file.Close();
                     Console.ReadKey();
-                    LineariskeresesMinta();
+                    BinariskeresesMinta();
                     break;
                 case "3":
-                    Lineariskereses();
+                    Binariskereses();
                     break;
                 case "4":
                     Exit();
                     break;
                 default:
                     InvalidInput();
-                    LineariskeresesMinta();
+                    BinariskeresesMinta();
                     break;
             }
         
         }
-        static void FuncBinariskereeses(int N, int[] X, int Y) {
-            int e = 0, u = N-1, k = 0, sorsz = -1;
+        static void FuncBinariskereses(int N, int[] X, int Y) {
+            int e = 0, u = N-1, k, sorsz;
             do
             {
                 k = ((e + u) / 2);
@@ -956,16 +956,18 @@ namespace menü_fr
                 {
                     e = k + 1;
                 }
-            } while(e <= u && X[k] == Y);
+            } while(e <= u && X[k] != Y);
+
             bool van = (e <= u);
             if(van)
             {
                 sorsz = k;
+                Console.WriteLine("A keresett elem a {0}. helyen van", sorsz);
             } else
             {
                 Console.WriteLine("A keresett elem nincs a sorozatban");
             }
-            Console.WriteLine("A keresett elem a {0}. helyen van", sorsz);
+            
         }
 		static void Exit()
 		{
