@@ -21,6 +21,10 @@ namespace menü_fr
 			{"Bemenet:\n\tN: Egész, X: Tömb[1..N:Valami], Y: Valami,\n\tT: Valami→Logikai\nKimenet:\n\tVAN: Logikai, SORSZ: Egész\nElőfeltétel:\n\tN>=0 és RendezettE(X)\nUtófeltétel:\n\tVAN ≡ (∃i(1≤i≤N): X[i] = Y) és\n\tVAN → 1≤SORSZ≤N és X[SORSZ] = Y és\n\t∀i(1≤i < SORSZ): X[i] < Y","Keresés(N,X,Y,VAN,SORSZ):\n\tI:= 1\n\tCiklus amíg I≤N és X[I] < Y\n\t\tI:= I + 1\n\tCiklus vége\n\tVAN:= (I≤N) és X[I] = Y\n\tHa VAN akkor \n\t\tSORSZ:= I\nEljárás vége." },//Lineáris keresés rendezett halmazban
 			{"Bemenet:\n\tN: Egész, X: Tömb[1..N:Valami], Y: Valami,\n\tT: Valami→Logikai\nKimenet:\n\tVAN: Logikai, SORSZ: Egész\nElőfeltétel:\n\tN>=0 és RendezettE(X)\nUtófeltétel:\n\tVAN ≡ (∃i(1≤i≤N): X[i] = Y) és\n\tVAN → 1≤SORSZ≤N és X[SORSZ] = Y és\n\t∀i(1≤i < SORSZ):X[i]≤Y és ∀i(SORSZ < i≤N): X[i]≥Y","Keresés(N,X,Y,VAN,SORSZ):\n\tE:= 1; U:= N\n\tCiklus\n\t\tK:=[(E + U) / 2]  (E + U felének egész értéke)\n\t\tElágazás\n\t\t\tY < X[K] esetén U:= K - 1\n\t\t\tY > X[K] esetén E:= K + 1\n\t\tElágazás vége\n\tamíg E≤U és X[K] ? Y\n\tCiklus vége\n\tVAN:= (E≤U)\n\tHa VAN akkor SORSZ:= K\nEljárás vége." } // bináris keresés (logaritmikus)
 			}; //data[x,y] x=tételek specifikációja, y=algoritmusa
+
+        static string[] dataarray = {" ", "1] Specifikáció", "2] Algoritmus/Pszeudo kód", "3] Mintaprogram", "4] Vissza", "5] Kilépés" };
+        static string[] dataarray_minta = {"", "1] Adatok beírásból", "2] Adatok fileból", "3] Vissza", "4] Kilépés" };
+        static string[] specalg = { "Specifikáció: ", "Algoritmus: " };
         static void printData(string a)
         {
             if (a == "m")//m = menu
@@ -46,13 +50,20 @@ namespace menü_fr
             UTF8Encoding uTF8 = new UTF8Encoding();
         }
 
-        static void arrowNav(Action[] methods_in)
+        static void arrowNav(Action[] methods_in, string[] menudata)
         {
+            
             int valasztott = 1;
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(0, valasztott);
+            Console.Write(menudata[valasztott]);
             
             while (true)
             {
+                Console.SetCursorPosition(0, valasztott);
                 var valasztas = Console.ReadKey(false).Key;
+
                 switch (valasztas)
                 {
                     case ConsoleKey.UpArrow:
@@ -60,31 +71,55 @@ namespace menü_fr
                         {
                             valasztott -= 1;
                         }
+                        
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.SetCursorPosition(0, valasztott);
+                        Console.Write("{0}", menudata[valasztott ]);
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.SetCursorPosition(0, valasztott + 1);
+                        Console.Write("{0}", menudata[valasztott +1]);
                         break;
+                        
                     case ConsoleKey.DownArrow:
-                        if (valasztott < methods_in.Length)
+                        if (valasztott < menudata.Length-1)
                         {
                             valasztott += 1;
                         }
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.SetCursorPosition(0, valasztott);
+                        Console.Write("{0}", menudata[valasztott]);
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.SetCursorPosition(0, valasztott - 1);
+                        Console.Write("{0}", menudata[valasztott-1]);
                         break;
                     case ConsoleKey.Escape:
+                        Console.ResetColor();
                         Exit();
                         break;
                     case ConsoleKey.Enter:
-                        methods_in[valasztott - 1]();
+                        Console.ResetColor();
+                        methods_in[valasztott-1]();
                         break;
                     default:
                         break;
                 }
+                Console.SetCursorPosition(0, 4);
+                
+
             }
         }
 		static void Menu()
 		{
 			Console.Clear();
-			Console.WriteLine("SZia üdvözöllek a programban!");
-			Console.WriteLine("Menü \n1] Elemi Progtételek\n2] Összett progtételek\n3] Rendezések\n4] Keresések\n5] Kilépés");
+			Console.WriteLine("Menü");
+			Console.WriteLine("1] Elemi programozástételek\n2] Összett programozástételek\n3] Rendezések\n4] Keresések\n5] Kilépés");
+            string[] menudata = { "Menü", "1] Elemi Programozástételek", "2] Összett programozástételek", "3] Rendezések", "4] Keresések", "5] Kilépés" };
             Action[] funcs = { ElemiAlmenu, OsszetettAlmenu, RendezesekAlmenu, KeresesekAlmenu,Exit };
-            arrowNav(funcs);
+            arrowNav(funcs, menudata);
             
 		}
 		static void InvalidInput()
@@ -98,42 +133,37 @@ namespace menü_fr
 			Console.Clear();
 			Console.WriteLine("Elemi programozásételek");
 			Console.WriteLine("1] Maximumkiválasztás\n2] Megszámolás\n3] Vissza\n4] Kilépés");
+            string[] menudata = { "Elemi programozásételek", "1] Maximumkiválasztás", "2] Megszámolás", "3] Vissza", "4] Kilépés" };
             Action[] funcs = { Maximumkivalasztas, Megszamolas, Menu, Exit };
-            arrowNav(funcs);
+            arrowNav(funcs, menudata);
         }
 		static void Maximumkivalasztas()
 		{
 			Console.Clear();
-			Console.WriteLine("Maximumkiválasztás");
+            string a = "Maximumkiválasztás";
+            Console.WriteLine(a);
             printData("m");
-			string tovabb = Console.ReadLine().Trim(' ');
-			switch(tovabb)
-			{
-				case "1":
-					Console.WriteLine(data[0, 0]);
-					Console.ReadKey();
-					Maximumkivalasztas();
-					break;
-				case "2":
-					Console.WriteLine(data[0, 1]);
-					Console.ReadKey();
-					Maximumkivalasztas();
-					break;
-				case "3":
-					MaxMinta();
-					break;
-				case "4":
-					ElemiAlmenu();
-					break;
-				case "5":
-					Exit();
-					break;
-				default:
-					InvalidInput();
-					Maximumkivalasztas();
-					break;
-			}
-		}
+			
+            
+            dataarray[0] = a;
+
+            Action[] funcs = { Maxspec,Maxalg, MaxMinta, ElemiAlmenu, Exit };
+            arrowNav(funcs, dataarray);
+        }
+        static void Maxspec() {
+            Console.Clear();
+            Console.WriteLine(specalg[0]);
+            Console.WriteLine(data[0, 0]);
+            Console.ReadKey();
+            Maximumkivalasztas();
+        }
+        static void Maxalg() {
+            Console.Clear();
+            Console.WriteLine(specalg[1]);
+            Console.WriteLine(data[0, 1]);
+            Console.ReadKey();
+            Maximumkivalasztas();
+        }
 		static void MaxMinta()
 		{
 			Console.Clear();
@@ -191,40 +221,33 @@ namespace menü_fr
 					MAX = I;
 				}
 			}
-            Console.WriteLine("A legnagyobb elem: {0}", MAX);
+            Console.WriteLine("A legnagyobb elem: {0}", X[MAX]);
         }
 		static void Megszamolas() {
 			Console.Clear();
-			Console.WriteLine("Megszámolás");
+            string a = "Megszámolás";
+            Console.WriteLine(a);
             printData("m");
-            string tovabb = Console.ReadLine().Trim(' ');
-			switch(tovabb)
-			{
-				case "1":
-					Console.WriteLine(data[1,0]);
-					Console.ReadKey();
-					Megszamolas();
-					break;
-				case "2":
-					Console.WriteLine(data[1,1]);
-					Console.ReadKey();
-					Megszamolas();
-					break;
-				case "3":
-					MegszamolMinta();
-					break;
-				case "4":
-					ElemiAlmenu();
-					break;
-				case "5":
-					Exit();
-					break;
-				default:
-					InvalidInput();
-					Megszamolas();
-					break;
-			}
-		}
+            
+            
+            dataarray[0] = a;
+            Action[] funcs = { Megszspec, Megszalg, MegszamolMinta, ElemiAlmenu, Exit };
+            arrowNav(funcs, dataarray);
+        }
+        static void Megszspec() {
+            Console.Clear();
+            Console.WriteLine(specalg[0]);
+            Console.WriteLine(data[1, 0]);
+            Console.ReadKey();
+            Megszamolas();
+        }
+        static void Megszalg() {
+            Console.Clear();
+            Console.WriteLine(specalg[1]);
+            Console.WriteLine(data[1, 1]);
+            Console.ReadKey();
+            Megszamolas();
+        }
 		static void MegszamolMinta() {
 			Console.Clear();
 			Console.WriteLine("Megszámolás mintaprogram");
@@ -281,43 +304,37 @@ namespace menü_fr
 		static void OsszetettAlmenu()
 		{
 			Console.Clear();
+            
 			Console.WriteLine("Összetett programozásételek");
 			Console.WriteLine("1] Metszet\n2] Kiválogatás\n3] Vissza\n4] Kilépés");
+            string[] menudata = { "Összetett programozásételek","1] Metszet", "2] Kiválogatás", "3] Vissza", "4] Kilépés" };
             Action[] funcs = { Metszet,Kivalogatas,Menu,Exit};
-            arrowNav(funcs);
+            arrowNav(funcs, menudata);
         }
 		static void Metszet() {
 			Console.Clear();
-			Console.WriteLine("Metszet");
+            string a = "Metszet";
+			Console.WriteLine(a);
             printData("m");
-            string tovabb = Console.ReadLine().Trim(' ');
-			switch(tovabb)
-			{
-				case "1":
-					Console.WriteLine(data[2,0]);
-					Console.ReadKey();
-					Metszet();
-					break;
-				case "2":
-					Console.WriteLine(data[2,1]);
-					Console.ReadKey();
-					Metszet();
-					break;
-				case "3":
-					MetszetMinta();
-					break;
-				case "4":
-					OsszetettAlmenu();
-					break;
-				case "5":
-					Exit();
-					break;
-				default:
-					InvalidInput();
-					Metszet();
-					break;
-			}
-		}
+            
+            dataarray[0] = a;
+            Action[] funcs = { Metszspec, Metszalg, MetszetMinta, OsszetettAlmenu, Exit };
+            arrowNav(funcs, dataarray);
+        }
+        static void Metszspec(){
+            Console.Clear();
+            Console.WriteLine(specalg[0]);
+            Console.WriteLine(data[2, 0]);
+            Console.ReadKey();
+            Metszet();
+        }
+        static void Metszalg() {
+            Console.Clear();
+            Console.WriteLine(specalg[1]);
+            Console.WriteLine(data[2, 1]);
+            Console.ReadKey();
+            Metszet();
+        }
 		static void MetszetMinta()
 		{
 			Console.Clear();
@@ -408,39 +425,30 @@ namespace menü_fr
 			}
 			Console.WriteLine();
 		}
-
 		static void Kivalogatas() {
 			Console.Clear();
-			Console.WriteLine("Kiválogatás");
+			string a ="Kiválogatás";
+            Console.WriteLine(a);
             printData("m");
-            string tovabb = Console.ReadLine().Trim(' ');
-			switch(tovabb)
-			{
-				case "1":
-					Console.WriteLine(data[3,0]);
-					Console.ReadKey();
-					Kivalogatas();
-					break;
-				case "2":
-					Console.WriteLine(data[3,1]);
-					Console.ReadKey();
-					Kivalogatas();
-					break;
-				case "3":
-					KivalogatasMinta();
-					break;
-				case "4":
-					OsszetettAlmenu();
-					break;
-				case "5":
-					Exit();
-					break;
-				default:
-					InvalidInput();
-					Kivalogatas();
-					break;
-			}
-		}
+            
+            dataarray[0] = a;
+            Action[] funcs = { Kivspec, Kivalg, KivalogatasMinta, OsszetettAlmenu, Exit };
+            arrowNav(funcs, dataarray);
+        }
+        static void Kivspec() {
+            Console.Clear();
+            Console.WriteLine(specalg[0]);
+            Console.WriteLine(data[3, 0]);
+            Console.ReadKey();
+            Kivalogatas();
+        }
+        static void Kivalg() {
+            Console.Clear();
+            Console.WriteLine(specalg[1]);
+            Console.WriteLine(data[3, 1]);
+            Console.ReadKey();
+            Kivalogatas();
+        }
 		static void KivalogatasMinta()
 		{
 			Console.Clear();
@@ -516,41 +524,33 @@ namespace menü_fr
 			Console.Clear();
 			Console.WriteLine("Rendezések");
 			Console.WriteLine("1] Egyszerű cserés rendezés\n2] Javított Beillesztéses rendezés\n3] Vissza\n4] Kilépés");
+            string[] menudata = { "Rendezések", "1] Egyszerű cserés rendezés", "2] Javított Beillesztéses rendezés", "3] Vissza", "4] Kilépés" };
             Action[] funcs = {Egyszerucseres,Beillesztesesrendezes,Menu,Exit };
-            arrowNav(funcs);
+            arrowNav(funcs, menudata);
         }
 		static void Egyszerucseres() {
 			Console.Clear();
-			Console.WriteLine("Egyszerű cserés rendezés");
+            string a = "Egyszerű cserés rendezés";
+            Console.WriteLine(a);
             printData("m");
-            string tovabb = Console.ReadLine().Trim(' ');
-			switch(tovabb)
-			{
-				case "1":
-					Console.WriteLine(data[5,0]);
-					Console.ReadKey();
-					Egyszerucseres();
-					break;
-				case "2":
-					Console.WriteLine(data[5,1]);
-					Console.ReadKey();
-					Egyszerucseres();
-					break;
-				case "3":
-					EgyszerucseresMinta();
-					break;
-				case "4":
-					RendezesekAlmenu();
-					break;
-				case "5":
-					Exit();
-					break;
-				default:
-					InvalidInput();
-					Egyszerucseres();
-					break;
-			}
-		}
+            dataarray[0] = a;
+            Action[] funcs = { Egyszspec, Egyszalg, EgyszerucseresMinta, RendezesekAlmenu, Exit };
+            arrowNav(funcs, dataarray);
+        }
+        static void Egyszspec() {
+            Console.Clear();
+            Console.WriteLine(specalg[0]);
+            Console.WriteLine(data[5, 0]);
+            Console.ReadKey();
+            Egyszerucseres();
+        }
+        static void Egyszalg(){
+            Console.Clear();
+            Console.WriteLine(specalg[1]);
+            Console.WriteLine(data[5, 1]);
+			Console.ReadKey();
+			Egyszerucseres();
+    }
 		static void EgyszerucseresMinta()
 		{
 			Console.Clear();
@@ -630,39 +630,29 @@ namespace menü_fr
             Console.WriteLine("\nA rendezés {0} miliszekundum alatt ment végbe", ts.TotalMilliseconds);
             Console.WriteLine();
 		}
-
 		static void Beillesztesesrendezes() {
 			Console.Clear();
-			Console.WriteLine("Javított beillesztéses rendezés");
+            string a = "Javított beillesztéses rendezés";
+			Console.WriteLine(a);
             printData("m");
-            string tovabb = Console.ReadLine().Trim(' ');
-			switch(tovabb)
-			{
-				case "1":
-					Console.WriteLine(data[4,0]);
-					Console.ReadKey();
-					Beillesztesesrendezes();
-					break;
-				case "2":
-					Console.WriteLine(data[4,1]);
-					Console.ReadKey();
-					Beillesztesesrendezes();
-					break;
-				case "3":
-					BeillesztesesrendezesMinta();
-					break;
-				case "4":
-					RendezesekAlmenu();
-					break;
-				case "5":
-					Exit();
-					break;
-				default:
-					InvalidInput();
-					Beillesztesesrendezes();
-					break;
-			}
-		}
+            dataarray[0] = a;
+            Action[] funcs = { Beillesztesspec, Beillesztesalg, BeillesztesesrendezesMinta, RendezesekAlmenu, Exit };
+            arrowNav(funcs, dataarray);
+        }
+        static void Beillesztesspec() {
+            Console.Clear();
+            Console.WriteLine(specalg[0]);
+            Console.WriteLine(data[4, 0]);
+            Console.ReadKey();
+            Beillesztesesrendezes();
+        }
+        static void Beillesztesalg() {
+            Console.Clear();
+            Console.WriteLine(specalg[1]);
+            Console.WriteLine(data[4, 1]);
+            Console.ReadKey();
+            Beillesztesesrendezes();
+        }
 		static void BeillesztesesrendezesMinta()
 		{
 			Console.Clear();
@@ -744,41 +734,33 @@ namespace menü_fr
 			Console.Clear();
 			Console.WriteLine("Keresések");
 			Console.WriteLine("1] Lineáris keresés rendezett adathalmazban\n2] Bináris(Logaritmikus) keresés\n3] Vissza\n4] Kilépés");
+            string[] menudata = { "Keresések", "1] Lineáris keresés rendezett adathalmazban", "2] Bináris(Logaritmikus) keresés", "3] Vissza", "4] Kilépés" };
             Action[] funcs = { Lineariskereses,Binariskereses,Menu,Exit};
-            arrowNav(funcs);
+            arrowNav(funcs, menudata);
         }
 		static void Lineariskereses() {
 			Console.Clear();
-			Console.WriteLine("Lineáris keresés rendezett sorozatban");
+            string a = "Lineáris keresés rendezett sorozatban";
+			Console.WriteLine(a);
             printData("m");
-			string tovabb = Console.ReadLine().Trim(' ');
-			switch(tovabb)
-			{
-				case "1":
-					Console.WriteLine(data[6,0]);
-					Console.ReadKey();
-					Lineariskereses();
-					break;
-				case "2":
-					Console.WriteLine(data[6,1]);
-					Console.ReadKey();
-					Lineariskereses();
-					break;
-				case "3":
-					LineariskeresesMinta();
-					break;
-				case "4":
-					KeresesekAlmenu();
-					break;
-				case "5":
-					Exit();
-					break;
-				default:
-					InvalidInput();
-					Lineariskereses();
-					break;
-			}
-		}
+            dataarray[0] = a;
+            Action[] funcs = { Linearisspec, Linearisalg, LineariskeresesMinta, KeresesekAlmenu, Exit };
+            arrowNav(funcs, dataarray);
+        }
+        static void Linearisspec() {
+            Console.Clear();
+            Console.WriteLine(specalg[0]);
+            Console.WriteLine(data[6, 0]);
+            Console.ReadKey();
+            Lineariskereses();
+        }
+        static void Linearisalg() {
+            Console.Clear();
+            Console.WriteLine(specalg[1]);
+            Console.WriteLine(data[6, 1]);
+            Console.ReadKey();
+            Lineariskereses();
+        }
 		static void LineariskeresesMinta()
 		{
 			Console.Clear();
@@ -859,36 +841,27 @@ namespace menü_fr
 		}
 		static void Binariskereses() {
 			Console.Clear();
-			Console.WriteLine("Bináris (logaritmikus) keresés");
+            string a = "Bináris (logaritmikus) keresés";
+			Console.WriteLine(a);
             printData("m");
-            string tovabb = Console.ReadLine().Trim(' ');
-			switch(tovabb)
-			{
-				case "1":
-					Console.WriteLine(data[7,0]);
-					Console.ReadKey();
-					Binariskereses();
-					break;
-				case "2":
-					Console.WriteLine(data[7,1]);
-					Console.ReadKey();
-					Binariskereses();
-					break;
-				case "3":
-                    BinariskeresesMinta();
-					break;
-				case "4":
-					RendezesekAlmenu();
-					break;
-				case "5":
-					Exit();
-					break;
-				default:
-					InvalidInput();
-					Binariskereses();
-					break;
-			}
-		}
+            dataarray[0] = a;
+            Action[] funcs = { Binarisspec, Binarisalg, BinariskeresesMinta, KeresesekAlmenu, Exit };
+            arrowNav(funcs, dataarray);
+        }
+        static void Binarisspec(){
+            Console.Clear();
+            Console.WriteLine(specalg[0]);
+            Console.WriteLine(data[7, 0]);
+            Console.ReadKey();
+            Binariskereses();
+        }
+        static void Binarisalg(){
+            Console.Clear();
+            Console.WriteLine(specalg[0]);
+            Console.WriteLine(data[7, 1]);
+			Console.ReadKey();
+			Binariskereses();
+    }
         static void BinariskeresesMinta() {
             Console.Clear();
             Console.WriteLine("Bináris (logaritmikus) keresés mintaprogram");
@@ -991,6 +964,6 @@ namespace menü_fr
 			
 			
 		}
-		//  dokumentáció,  menü színezése
+		//  dokumentáció,  men elkészítése a Minta oldalakra
 	}
 }
