@@ -74,7 +74,7 @@ namespace menü_fr
                             valasztott -= 1;
                         }
 
-                        Console.BackgroundColor = ConsoleColor.White; //az menüpontok kiszínezése
+                        Console.BackgroundColor = ConsoleColor.White; //a menüpontok kiszínezése
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.SetCursorPosition(0, valasztott);
                         Console.Write("{0}", menudata[valasztott]);
@@ -118,9 +118,9 @@ namespace menü_fr
         {
             Console.Clear();
 
-            Console.WriteLine("Menü");
+            Console.WriteLine("Fő-Menü");
             Console.WriteLine("1] Elemi programozástételek\n2] Összett programozástételek\n3] Rendezések\n4] Keresések\n5] Kilépés");
-            string[] menudata = { "Menü", "1] Elemi programozástételek", "2] Összett programozástételek", "3] Rendezések", "4] Keresések", "5] Kilépés" };
+            string[] menudata = { "Fő-Menü", "1] Elemi programozástételek", "2] Összett programozástételek", "3] Rendezések", "4] Keresések", "5] Kilépés" };
             Action[] funcs = { ElemiAlmenu, OsszetettAlmenu, RendezesekAlmenu, KeresesekAlmenu, Exit };
             arrowNav(funcs, menudata);
 
@@ -303,7 +303,7 @@ namespace menü_fr
         }
         static void Megszamolfilebol() {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[1]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Adja meg az adathalmaz elérési útvonalát!");
@@ -376,7 +376,7 @@ namespace menü_fr
         }
         static void Metszetbeir() {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[2]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Írja be az egyik tömb elemeit (szóközökkel elválasztva)");
@@ -419,9 +419,9 @@ namespace menü_fr
         }
         static void Metszetfilebol() {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[2]);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Adja meg az adathalmaz elérési útvonalát! (két halmaz elemei két sorban, szóközzel elválasztva)");
             Console.WriteLine("A 'vissza' beírásával léphet ki!");
             string url = Console.ReadLine();
@@ -505,7 +505,7 @@ namespace menü_fr
         }
         static void Kivalogatasbeir() {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[3]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Írjon be számokat (szóközökkel elválasztva), a program kiválogatja a 10-nél nagyobbakat");
@@ -530,7 +530,7 @@ namespace menü_fr
         }
         static void Kivalogatasfilebol() {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[3]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Adja meg az adathalmaz elérési útvonalát, a program kiválogatja a 10-nél nagyobbakat! (számok szóközökkel elválasztva)");
@@ -614,7 +614,7 @@ namespace menü_fr
         }
         static void Egyszerucseresbeir() {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[4]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Írjon be számokat (szóközökkel elválasztva), a program rendezi ezeket");
@@ -640,7 +640,7 @@ namespace menü_fr
         }
         static void Egyszerucseresfilebol() {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[4]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Adja meg az adathalmaz elérési útvonalát, a program kiválogatja a 10-nél nagyobbakat! (számok szóközökkel elválasztva)");
@@ -723,7 +723,7 @@ namespace menü_fr
         }
         static void Beillesztesesbeir() {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[5]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Írjon be számokat (szóközökkel elválasztva), a program rendezi ezeket");
@@ -750,12 +750,15 @@ namespace menü_fr
         }
         static void Beillesztesesfilebol() {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[5]);
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Adja meg az adathalmaz elérési útvonalát, a program kiválogatja a 10-nél nagyobbakat! (számok szóközökkel elválasztva)");
+            Console.WriteLine("Adja meg az adathalmaz elérési útvonalát, a program rendezi a számokat (számok szóközökkel elválasztva)");
             Console.WriteLine("A 'vissza' beírásával léphet ki!");
+            Console.WriteLine();
+            Console.Write("Útvonal: ");
             string url = Console.ReadLine();
+            Console.WriteLine();
             FileInputUsermanagement(BeillesztesesrendezesMinta, Beillesztesesfilebol, url);
             StreamReader file = new StreamReader(url);
             string[] tomb_fromfileX = file.ReadLine().Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
@@ -840,7 +843,7 @@ namespace menü_fr
         }
         static void Linearisbeir() {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[6]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Írjon be számokat rendezett sorozatban (szóközökkel elválasztva)!");
@@ -880,7 +883,7 @@ namespace menü_fr
         }
         static void Linearisfilebol() {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[6]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Adja meg a rendezett adathalmaz elérési útvonalát!");
@@ -970,7 +973,7 @@ namespace menü_fr
         }
         static void Binarisbeir() {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[7]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Írjon be számokat rendezett sorozatban (szóközökkel elválasztva)!");
@@ -1009,7 +1012,7 @@ namespace menü_fr
         }
         static void Binarisfilebol() {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[7]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Adja meg a rendezett adathalmaz elérési útvonalát!");
@@ -1094,7 +1097,9 @@ namespace menü_fr
                     if(line != null)
                     {
                         Console.SetCursorPosition((Console.WindowWidth - line.Length) / 2, Console.CursorTop);
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
                         Console.WriteLine(line);
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
                 } while(line != null);
             }
