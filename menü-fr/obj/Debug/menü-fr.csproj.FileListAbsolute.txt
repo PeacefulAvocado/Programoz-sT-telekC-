@@ -18,3 +18,10 @@ D:\Boronkay\programozás\Projekt2\menü-fr\obj\Debug\menü-fr.csproj.AssemblyRef
 D:\Boronkay\programozás\Projekt2\menü-fr\obj\Debug\menü-fr.csproj.CoreCompileInputs.cache
 D:\Boronkay\programozás\Projekt2\menü-fr\obj\Debug\menü-fr.exe
 D:\Boronkay\programozás\Projekt2\menü-fr\obj\Debug\menü-fr.pdb
+D:\Boronkay\programozás\Projekt2.2\menü-fr\bin\Debug\menü-fr.exe.config
+D:\Boronkay\programozás\Projekt2.2\menü-fr\bin\Debug\menü-fr.exe
+D:\Boronkay\programozás\Projekt2.2\menü-fr\bin\Debug\menü-fr.pdb
+D:\Boronkay\programozás\Projekt2.2\menü-fr\obj\Debug\menü-fr.csproj.AssemblyReference.cache
+D:\Boronkay\programozás\Projekt2.2\menü-fr\obj\Debug\menü-fr.csproj.CoreCompileInputs.cache
+D:\Boronkay\programozás\Projekt2.2\menü-fr\obj\Debug\menü-fr.exe
+D:\Boronkay\programozás\Projekt2.2\menü-fr\obj\Debug\menü-fr.pdb

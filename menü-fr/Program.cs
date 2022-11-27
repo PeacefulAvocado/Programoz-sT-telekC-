@@ -25,10 +25,10 @@ namespace menü_fr
         static string[] dataarray = { " ", "1] Specifikáció", "2] Algoritmus/Pszeudo kód", "3] Mintaprogram", "4] Vissza", "5] Kilépés" };
         static string[] dataarray_minta = { "", "1] Adatok beírásból", "2] Adatok fileból", "3] Vissza", "4] Kilépés" };
         static string[] specalg = { "Specifikáció: ", "Algoritmus: " };
-        static string[] mintak = { "Maximumkiválasztás mintaprogram", "Megszámolás mintaprogram", "Metszet mintaprogram", "Kiválogatás mintaprogram", "Egyszerű cserés rendezés mintaprogram", "Javított beillesztéses rendezés mintaprogram", "Lineáris keresés mintaprogram", "Bináris (logaritmikus) keresés mintaprogram" };
-        static string[] exitargs = { "exit", "vissza", "back", "x", "X", "Exit", "Vissza", "EXIT", "VISSZA", "Back", "BACK" };
+        static string[] mintak = { "Maximumkiválasztás mintaprogram", "Megszámolás mintaprogram", "Metszet mintaprogram", "Kiválogatás mintaprogram", "Egyszerű cserés rendezés mintaprogram", "Javított beillesztéses rendezés mintaprogram", "Lineáris keresés mintaprogram", "Bináris (logaritmikus) keresés mintaprogram" }; //menük szövege
+        static string[] exitargs = { "exit", "vissza", "back", "x", "X", "Exit", "Vissza", "EXIT", "VISSZA", "Back", "BACK" }; //a fájlbevitelnél ezek beírásával kilép a program
 
-        static void printData(string a)
+        static void printData(string a) //a többször megismétlődő kiírt szövegek egy eljárásból lehívhatók
         {
             if (a == "m")//m = menu
             {
@@ -46,13 +46,13 @@ namespace menü_fr
                 Console.WriteLine("4] Kilépés");
             }
         }
-        static void LaunchArguments()
+        static void LaunchArguments() //Konzol előkészítése
         {
             Console.SetWindowSize(128, 32);
             Console.Title = "Programozástételek";
             UTF8Encoding uTF8 = new UTF8Encoding();
         }
-        static void arrowNav(Action[] methods_in, string[] menudata)
+        static void arrowNav(Action[] methods_in, string[] menudata) //nyílvezérelt menü, amely a kiválasztható eljárásokat, és a menüpontok szövegét kapja paraméternek
         {
             Console.CursorVisible = false;
             int valasztott = 1;
@@ -74,7 +74,7 @@ namespace menü_fr
                             valasztott -= 1;
                         }
 
-                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.BackgroundColor = ConsoleColor.White; //az menüpontok kiszínezése
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.SetCursorPosition(0, valasztott);
                         Console.Write("{0}", menudata[valasztott]);
@@ -114,7 +114,7 @@ namespace menü_fr
 
             }
         }
-        static void Menu()
+        static void Menu() //főmenü
         {
             Console.Clear();
 
@@ -125,13 +125,13 @@ namespace menü_fr
             arrowNav(funcs, menudata);
 
         }
-        static void InvalidInput()
+        static void InvalidInput() //hibás bemeneti érték
         {
             Console.WriteLine("A bemenő adatok formátuma nem megfelelő!");
             System.Threading.Thread.Sleep(1000);
 
         }
-        static void FileInputUsermanagement(Action felsobbmenu,Action onmaga,string url)
+        static void FileInputUsermanagement(Action felsobbmenu,Action onmaga,string url) //ellenőrzi, hogy létező URL-t adott-e meg a felhasználó, és kilép, ha erre utasító szó lett megadva
         {
             if (exitargs.Contains(url))
             {
@@ -149,7 +149,7 @@ namespace menü_fr
                 throw;
             }
         }
-        static void ElemiAlmenu()
+        static void ElemiAlmenu() // Elemi programozásételek almenü
         {
             Console.Clear();
             Console.WriteLine("Elemi programozásételek");
@@ -158,7 +158,7 @@ namespace menü_fr
             Action[] funcs = { Maximumkivalasztas, Megszamolas, Menu, Exit };
             arrowNav(funcs, menudata);
         }
-        static void Maximumkivalasztas()
+        static void Maximumkivalasztas() //Maximumkiválasztás menü
         {
             Console.Clear();
             string a = "Maximumkiválasztás";
@@ -170,21 +170,21 @@ namespace menü_fr
             Action[] funcs = { Maxspec, Maxalg, MaxMinta, ElemiAlmenu, Exit };
             arrowNav(funcs, dataarray);
         }
-        static void Maxspec() {
+        static void Maxspec(){ //Maximumkiválasztás specifikáció
             Console.Clear();
             Console.WriteLine(specalg[0]);
             Console.WriteLine(data[0, 0]);
             Console.ReadKey();
             Maximumkivalasztas();
         }
-        static void Maxalg() {
+        static void Maxalg(){ //Maximumkiválasztás algoritmus
             Console.Clear();
             Console.WriteLine(specalg[1]);
             Console.WriteLine(data[0, 1]);
             Console.ReadKey();
             Maximumkivalasztas();
         }
-        static void MaxMinta()
+        static void MaxMinta() //Maximumkiválasztás mintaprogram menü
         {
             Console.Clear();
             string a = mintak[0];
@@ -195,7 +195,7 @@ namespace menü_fr
             Action[] funcs = { Maxbeir, Maxfilebol, Maximumkivalasztas, Exit };
             arrowNav(funcs, dataarray_minta);
         }
-        static void Maxbeir() {
+        static void Maxbeir(){ //Maximumkiválasztás mintaprogram beírt adatokkal
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[0]);
@@ -220,7 +220,7 @@ namespace menü_fr
             Console.ReadKey();
             MaxMinta();
         }
-        static void Maxfilebol() {
+        static void Maxfilebol(){ //Maximumkiválasztás mintaprogram fileból bekért adatokkal
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[0]);
@@ -241,7 +241,7 @@ namespace menü_fr
             Console.ReadKey();
             MaxMinta();
         }
-        static void FuncMaxKiv(int[] X, int N)
+        static void FuncMaxKiv(int[] X, int N) ////Maximumkiválasztás mintaprogram
         {
             int MAX = 0;
             for(int I = 1; I < N; I++)
@@ -1073,7 +1073,7 @@ namespace menü_fr
             
             
         }
-		static void Exit()
+		static void Exit() //Kilépés a programból, elköszönő üzenet
 		{
 			Console.Clear();
             using(StringReader reader = new StringReader(@"
@@ -1105,12 +1105,12 @@ namespace menü_fr
 		}
 
 
-		static void Main(string[] args)
+		static void Main(string[] args) //főprogram
 		{
 			LaunchArguments();
 			Menu();
             
         }
-		//  dokumentáció, 
+		
 	}
 }
