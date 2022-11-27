@@ -421,7 +421,7 @@ namespace menü_fr
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[2]);
-            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Adja meg az adathalmaz elérési útvonalát! (két halmaz elemei két sorban, szóközzel elválasztva)");
             Console.WriteLine("A 'vissza' beírásával léphet ki!");
             string url = Console.ReadLine();
