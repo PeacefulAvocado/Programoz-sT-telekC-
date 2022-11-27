@@ -130,12 +130,6 @@ namespace menü_fr
             System.Threading.Thread.Sleep(1000);
 
         }
-        static void InvalidURL(Action action)
-        {
-            Console.WriteLine("A megadott elérési útvonal nem megfelelő!");
-            System.Threading.Thread.Sleep(1000);
-            action();
-        }
         static void FileInputUsermanagement(Action felsobbmenu,Action onmaga,string url)
         {
             if (exitargs.Contains(url))
@@ -146,9 +140,11 @@ namespace menü_fr
             {
                 StreamReader streamReader_test = new StreamReader(url);
             }
-            catch (Exception)
+            catch (Exception) //invalidURL
             {
-                InvalidURL(onmaga);
+                Console.WriteLine("A megadott elérési útvonal nem megfelelő!");
+                System.Threading.Thread.Sleep(1000);
+                onmaga();
                 throw;
             }
         }
@@ -514,9 +510,18 @@ namespace menü_fr
             Console.WriteLine("Írjon be számokat (szóközökkel elválasztva), a program kiválogatja a 10-nél nagyobbakat");
             string[] X_beker = Console.ReadLine().Split(' ');
             int[] X = new int[X_beker.Length];
-            for(int i = 0; i < X_beker.Length; i++)
+            try
             {
-                X[i] = Convert.ToInt32(X_beker[i]);
+                for (int i = 0; i < X_beker.Length; i++)
+                {
+                    X[i] = Convert.ToInt32(X_beker[i]);
+                }
+            }
+            catch (Exception)
+            {
+                InvalidInput();
+                Kivalogatasbeir();
+                throw;
             }
             FuncKivalogatas(X.Length, X);
             Console.ReadKey();
@@ -614,13 +619,23 @@ namespace menü_fr
             Console.WriteLine("Írjon be számokat (szóközökkel elválasztva), a program rendezi ezeket");
             string[] X_beker = Console.ReadLine().Split(' ');
             int[] X = new int[X_beker.Length];
-            for(int i = 0; i < X_beker.Length; i++)
+            try
             {
-                X[i] = Convert.ToInt32(X_beker[i]);
+                for (int i = 0; i < X_beker.Length; i++)
+                {
+                    X[i] = Convert.ToInt32(X_beker[i]);
+                }
             }
+            catch (Exception)
+            {
+                InvalidInput();
+                Egyszerucseresbeir();
+                throw;
+            }
+            
             FuncEgyszerucseres(X.Length, X);
             Console.ReadKey();
-            MetszetMinta();
+            EgyszerucseresMinta();
         }
         static void Egyszerucseresfilebol() {
             Console.Clear();
@@ -713,10 +728,20 @@ namespace menü_fr
             Console.WriteLine("Írjon be számokat (szóközökkel elválasztva), a program rendezi ezeket");
             string[] X_beker = Console.ReadLine().Split(' ');
             int[] X = new int[X_beker.Length];
-            for(int i = 0; i < X_beker.Length; i++)
+            try
             {
-                X[i] = Convert.ToInt32(X_beker[i]);
+                for (int i = 0; i < X_beker.Length; i++)
+                {
+                    X[i] = Convert.ToInt32(X_beker[i]);
+                }
             }
+            catch (Exception)
+            {
+                InvalidInput();
+                Beillesztesesbeir();
+                throw;
+            }
+            
             //
             FuncBeillesztesesrendezes(X.Length, X);
             Console.ReadKey();
@@ -820,14 +845,35 @@ namespace menü_fr
             Console.WriteLine("Írjon be számokat rendezett sorozatban (szóközökkel elválasztva)!");
             string[] X_beker = Console.ReadLine().Split(' ');
             int[] X = new int[X_beker.Length];
-            for(int i = 0; i < X_beker.Length; i++)
+            try
             {
-                X[i] = Convert.ToInt32(X_beker[i]);
+                for (int i = 0; i < X_beker.Length; i++)
+                {
+                    X[i] = Convert.ToInt32(X_beker[i]);
+                }
             }
+            catch (Exception)
+            {
+                InvalidInput();
+                Linearisbeir();
+                throw;
+            }
+            
             Console.WriteLine("Írjon be egy számot, a program megkeresei a sorozatban");
-            int keresett = Convert.ToInt32(Console.ReadLine());
+            string keresett = Console.ReadLine();
+            try
+            {
+                Convert.ToInt32(keresett);
+            }
+            catch (Exception)
+            {
+                InvalidInput();
+                Linearisbeir();
+                throw;
+            }
+            
             //
-            FuncLineariskereses(X.Length, X, keresett);
+            FuncLineariskereses(X.Length, X, Convert.ToInt32(keresett));
             Console.ReadKey();
             LineariskeresesMinta();
         }
@@ -848,9 +894,19 @@ namespace menü_fr
                 X_fromfile[i] = Convert.ToInt32(tomb_fromfileX[i]);
             }
             Console.WriteLine("Írjon be egy számot, a program megkeresei a sorozatban");
-            int keresett_file = Convert.ToInt32(Console.ReadLine());
-
-            FuncLineariskereses(X_fromfile.Length, X_fromfile, keresett_file);
+            string keresett_file = Console.ReadLine();
+            
+            try
+            {
+                Convert.ToInt32(keresett_file);
+            }
+            catch (Exception)
+            {
+                InvalidInput();
+                Linearisfilebol();
+                throw;
+            }
+            FuncLineariskereses(X_fromfile.Length, X_fromfile, Convert.ToInt32(keresett_file));
             file.Close();
             Console.ReadKey();
             LineariskeresesMinta();
@@ -919,14 +975,34 @@ namespace menü_fr
             Console.WriteLine("Írjon be számokat rendezett sorozatban (szóközökkel elválasztva)!");
             string[] X_beker = Console.ReadLine().Split(' ');
             int[] X = new int[X_beker.Length];
-            for(int i = 0; i < X_beker.Length; i++)
+            try
             {
-                X[i] = Convert.ToInt32(X_beker[i]);
+                for (int i = 0; i < X_beker.Length; i++)
+                {
+                    X[i] = Convert.ToInt32(X_beker[i]);
+                }
             }
+            catch (Exception)
+            {
+                InvalidInput();
+                Binarisbeir();
+                throw;
+            }
+            
             Console.WriteLine("Írjon be egy számot, a program megkeresei a sorozatban");
-            int keresett = Convert.ToInt32(Console.ReadLine());
+            string keresett = Console.ReadLine();
+            try
+            {
+                Convert.ToInt32(keresett);
+            }
+            catch (Exception)
+            {
+                InvalidInput();
+                Binarisbeir();
+                throw;
+            }
             //
-            FuncBinariskereses(X.Length, X, keresett);
+            FuncBinariskereses(X.Length, X, Convert.ToInt32(keresett));
             Console.ReadKey();
             BinariskeresesMinta();
         }
@@ -947,9 +1023,20 @@ namespace menü_fr
                 X_fromfile[i] = Convert.ToInt32(tomb_fromfileX[i]);
             }
             Console.WriteLine("Írjon be egy számot, a program megkeresei a sorozatban");
-            int keresett_file = Convert.ToInt32(Console.ReadLine());
+            string keresett_file = Console.ReadLine();
 
-            FuncBinariskereses(X_fromfile.Length, X_fromfile, keresett_file);
+            try
+            {
+                Convert.ToInt32(keresett_file);
+            }
+            catch (Exception)
+            {
+                InvalidInput();
+                Binarisfilebol();
+                throw;
+            }
+
+            FuncBinariskereses(X_fromfile.Length, X_fromfile, Convert.ToInt32(keresett_file));
             file.Close();
             Console.ReadKey();
             BinariskeresesMinta();
