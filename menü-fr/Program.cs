@@ -27,6 +27,7 @@ namespace menü_fr
         static string[] specalg = { "Specifikáció: ", "Algoritmus: " };
         static string[] mintak = { "Maximumkiválasztás mintaprogram", "Megszámolás mintaprogram", "Metszet mintaprogram", "Kiválogatás mintaprogram", "Egyszerű cserés rendezés mintaprogram", "Javított beillesztéses rendezés mintaprogram", "Lineáris keresés mintaprogram", "Bináris (logaritmikus) keresés mintaprogram" };
         static string[] exitargs = { "exit", "vissza", "back", "x", "X", "Exit", "Vissza", "EXIT", "VISSZA", "Back", "BACK" };
+
         static void printData(string a)
         {
             if (a == "m")//m = menu
