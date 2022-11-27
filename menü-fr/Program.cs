@@ -381,12 +381,12 @@ namespace menü_fr
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Írja be az egyik tömb elemeit (szóközökkel elválasztva)");
             string[] X_beker = Console.ReadLine().Split(' ');
-            int[] X = new int[X_beker.Length];
+            string[] X = new string[X_beker.Length];
             try
             {
                 for (int i = 0; i < X_beker.Length; i++)
                 {
-                    X[i] = Convert.ToInt32(X_beker[i]);
+                    X[i] = X_beker[i];
                 }
             }
             catch (Exception)
@@ -398,12 +398,12 @@ namespace menü_fr
             
             Console.WriteLine("Írja be a másik tömb elemeit (szóközökkel elválasztva)");
             string[] Y_beker = Console.ReadLine().Split(' ');
-            int[] Y = new int[Y_beker.Length];
+            string[] Y = new string[Y_beker.Length];
             try
             {
                 for (int i = 0; i < Y_beker.Length; i++)
                 {
-                    Y[i] = Convert.ToInt32(Y_beker[i]);
+                    Y[i] = Y_beker[i];
                 }
             }
             catch (Exception)
@@ -428,26 +428,26 @@ namespace menü_fr
             FileInputUsermanagement(MetszetMinta, Metszetfilebol, url);
             StreamReader file = new StreamReader(url);
             string[] tomb_fromfileX = file.ReadLine().Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            int[] X_fromfile = new int[tomb_fromfileX.Length];
+            string[] X_fromfile = new string[tomb_fromfileX.Length];
             for(int i = 0; i < tomb_fromfileX.Length; i++)
             {
-                X_fromfile[i] = Convert.ToInt32(tomb_fromfileX[i]);
+                X_fromfile[i] = tomb_fromfileX[i];
             }
             string[] tomb_fromfileY = file.ReadLine().Split(new char[] { ' ', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            int[] Y_fromfile = new int[tomb_fromfileY.Length];
+            string[] Y_fromfile = new string[tomb_fromfileY.Length];
             for(int i = 0; i < tomb_fromfileY.Length; i++)
             {
-                Y_fromfile[i] = Convert.ToInt32(tomb_fromfileY[i]);
+                Y_fromfile[i] = tomb_fromfileY[i];
             }
             FuncMetszet(X_fromfile.Length, X_fromfile, Y_fromfile.Length, Y_fromfile);
             file.Close();
             Console.ReadKey();
             MetszetMinta();
         }
-        static void FuncMetszet(int N, int[] X, int M, int[] Y)
+        static void FuncMetszet(int N, string[] X, int M, string[] Y)
         {
             int db = 0;
-            int[] Z = new int[N];
+            string[] Z = new string[N];
             for(int i = 0; i < N; i++)
             {
                 int j = 0;
@@ -1083,9 +1083,9 @@ namespace menü_fr
 ─██║▀█║██║█║██║█║██║█║─
 ─▀███▀║▀██▀║▀██▀║███▀║─
 ───────────────────────
-───▐█▀▄─ ▀▄─▄▀ █▀▀──█───
-───▐█▀▀▄ ──█── █▀▀──▀───
-───▐█▄▄▀ ──▀── ▀▀▀──▄───"))
+───██▀▄─ ▀▄─▄▀ █▀▀──█───
+───██▀▀▄ ──█── █▀▀──▀───
+───██▄▄▀ ──▀── ▀▀▀──▄───"))
             {
                 string line = string.Empty;
                 do
@@ -1103,7 +1103,7 @@ namespace menü_fr
             System.Threading.Thread.Sleep(1000);
 			System.Environment.Exit(0);
 		}
-
+        
 
 		static void Main(string[] args)
 		{
