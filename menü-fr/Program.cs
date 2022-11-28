@@ -12,14 +12,14 @@ namespace menü_fr
     {
         static string[,] data =
             {
-            { "Bemenet: \n\tN:Egész, X:Tömb [1..N:H], H rendezett elemtípus (Van olyan <,<= rendezési relációk)\nKimenet: \n\tMAX: Egész\nElőfeltétel: \n\tN>=1\nUtófeltétel: \n\t1<=MAX<=N és i(1<=i<=N): X[i]<=X[MAX]", "Maximumkiválasztás (N, X, MAX):\n\tMAX:= 1\n\tCiklus I = 2 - től N - ig\n\t\tHa X[MAX] < X[I] akkor\n\t\t\tMAX:= I\n\tCiklus vége\nEljárás vége." },//maxkivalasztas| specifikacio,algoritmus 
-			{"Bemenet: \n\tN: Egész, X: Tömb [1..N:H], T:H→Logikai\nKimenet: \n\tDB: Egész\nElőfeltétel: \n\tN>=0\nUtófeltétel: \n\tDB = SZUM(i = 1..N; T(X[i])) 1","Megszámolás (N,X,DB):\n\tDB:= 0\n\tCiklus I = 1 - től N - ig\n\t\tHa T(X[I]) akkor \n\t\t\tDB:= DB + 1\n\tCiklus vége\nEljárás vége" },//megszamolas | specifikacio,algoritmus
-			{"Bemenet: \n\tN, M: Egész, X: Tömb[1..N:Valami], Y: Tömb[1..M:Valami]\nKimenet: \n\tDb: Egész, Z: Tömb[1..min(N, M):Valami]\nElőfeltétel: \n\tN>=0 és M>=0 és HalmazE(X) és HalmazE(Y)\nUtófeltétel:\n\tDb = SZUM(i = 1..N; X[i]  Eleme Y) 1  és\nMinden i(1<=i<=Db): (Z[i] Eleme X és Z[i]  Eleme Y)  és\nHalmazE(Z)","Metszet(N,X,M,Y,Db,Z):\n\t[kiválogatás:]\n\tDb:= 0\n\tCiklus I = 1 - től N - ig\n\t\t[eldöntés:]\n\t\tJ:= 1\n\t\tCiklus amíg J<=M és X[I]≠Y[J]\n\t\t\tJ:= J + 1\n\t\tCiklus vége\n\t\tHa J<=M akkor \n\t\t\tDb:= Db + 1; Z[Db]:= X[I]\n\tCiklus vége\nEljárás vége." }, //metszet 
-			{"Bemenet:\n\tN: Egész, X: Tömb[1..N:Valami]\nKimenet:\n\tDb: Egész, Y: Tömb[1..N:Egész]\nElőfeltétel:\n\tN>=0\nUtófeltétel:\n\tDb = SZUM(i = 1..N; T(X[i])) 1 és\n\tMinden i(1<=i<=Db): T(X[Y[i]])  és\n\tY Részhalmaz (1, 2, ...,N)","Kiválogatás(N,X,Db,Y):\n\tDb:= 0\n\tCiklus I = 1 - től N - ig\n\t\tHa T(X[I]) akkor \n\t\t\tDb:= Db + 1; Y[Db]:= I\n\tCiklus vége\nEljárás vége." }, // kivalogatas
-			{"Bemenet:\n\tN: Egész, X: Tömb[1..N:Valami]\nKimenet:\n\tX: Tömb[1..N:Valami]\nElőfeltétel:\n\tN>=0 és RendezettHalmazE(Valami)\nUtófeltétel:\n\tRendezettE(X’) és X’  Eleme Permutáció(X)","Rendezés(N,X):\n\tCiklus I = 2 - től N - ig\n\t\tJ:= I - 1; Y:= X[I]\n\t\tCiklus amíg J > 0 és X[J]> Y\n\t\t\tX[J + 1]:= X[J]; J:= J - 1\n\t\tCiklus vége\n\t\tX[J + 1]:= Y\n\tCiklus vége\nEljárás vége." }, //beillesztésesrendezés
-			{"Bemenet:\n\tN: Egész, X: Tömb[1..N:Valami]\nKimenet:\n\tX: Tömb[1..N:Valami]\nElőfeltétel:\n\tN>=0 és RendezettHalmazE(Valami)\nUtófeltétel:\n\tRendezettE(X’) és X’  Eleme Permutáció(X)","Rendezés(N,X):\n\tCiklus I = 1 - től N - 1 - ig\n\t\tCiklus J = I + 1 - től N - ig\n\t\t\tHa X[I] > X[J] akkor \n\t\t\t\tCsere(X[I], X[J])\n\t\tCiklus vége\n\tCiklus vége\nEljárás vége." },//egyszerücserésrendezés
-			{"Bemenet:\n\tN: Egész, X: Tömb[1..N:Valami], Y: Valami,\n\tT: Valami→Logikai\nKimenet:\n\tVAN: Logikai, SORSZ: Egész\nElőfeltétel:\n\tN>=0 és RendezettE(X)\nUtófeltétel:\n\tVAN ≡ (Van olyan i(1<=i<=N): X[i] = Y) és\n\tVAN → 1<=SORSZ<=N és X[SORSZ] = Y és\n\tMinden i(1<=i < SORSZ): X[i] < Y","Keresés(N,X,Y,VAN,SORSZ):\n\tI:= 1\n\tCiklus amíg I<=N és X[I] < Y\n\t\tI:= I + 1\n\tCiklus vége\n\tVAN:= (I<=N) és X[I] = Y\n\tHa VAN akkor \n\t\tSORSZ:= I\nEljárás vége." },//Lineáris keresés rendezett halmazban
-			{"Bemenet:\n\tN: Egész, X: Tömb[1..N:Valami], Y: Valami,\n\tT: Valami→Logikai\nKimenet:\n\tVAN: Logikai, SORSZ: Egész\nElőfeltétel:\n\tN>=0 és RendezettE(X)\nUtófeltétel:\n\tVAN ≡ (Van olyan i(1<=i<=N): X[i] = Y) és\n\tVAN → 1<=SORSZ<=N és X[SORSZ] = Y és\n\tMinden i(1<=i < SORSZ):X[i]<=Y és Minden i(SORSZ < i<=N): X[i]>=Y","Keresés(N,X,Y,VAN,SORSZ):\n\tE:= 1; U:= N\n\tCiklus\n\t\tK:=[(E + U) / 2]  (E + U felének egész értéke)\n\t\tElágazás\n\t\t\tY < X[K] esetén U:= K - 1\n\t\t\tY > X[K] esetén E:= K + 1\n\t\tElágazás vége\n\tamíg E<=U és X[K] ? Y\n\tCiklus vége\n\tVAN:= (E<=U)\n\tHa VAN akkor SORSZ:= K\nEljárás vége." } // bináris keresés (logaritmikus)
+            { "\nBemenet: \n\n\tN:Egész, X:Tömb [1..N:H], H rendezett elemtípus (Van olyan <,<= rendezési relációk)\n\nKimenet: \n\n\tMAX: Egész\n\nElőfeltétel: \n\n\tN>=1\n\nUtófeltétel: \n\n\t1<=MAX<=N és i(1<=i<=N): X[i]<=X[MAX]", "\nMaximumkiválasztás (N, X, MAX):\n\tMAX:= 1\n\tCiklus I = 2 - től N - ig\n\t\tHa X[MAX] < X[I] akkor\n\t\t\tMAX:= I\n\tCiklus vége\nEljárás vége." },//maxkivalasztas| specifikacio,algoritmus 
+			{"\nBemenet: \n\n\tN: Egész, X: Tömb [1..N:H], T:H→Logikai\n\nKimenet: \n\n\tDB: Egész\n\nElőfeltétel: \n\n\tN>=0\n\nUtófeltétel: \n\n\tDB = SZUM(i = 1..N; T(X[i])) 1","\nMegszámolás (N,X,DB):\n\tDB:= 0\n\tCiklus I = 1 - től N - ig\n\t\tHa T(X[I]) akkor \n\t\t\tDB:= DB + 1\n\tCiklus vége\nEljárás vége" },//megszamolas | specifikacio,algoritmus
+			{"\nBemenet: \n\n\tN, M: Egész, X: Tömb[1..N:Valami], Y: Tömb[1..M:Valami]\n\nKimenet: \n\n\tDb: Egész, Z: Tömb[1..min(N, M):Valami]\n\nElőfeltétel: \n\n\tN>=0 és M>=0 és HalmazE(X) és HalmazE(Y)\n\nUtófeltétel:\n\n\tDb = SZUM(i = 1..N; X[i]  Eleme Y) 1  és\n\n\tMinden i(1<=i<=Db): (Z[i] Eleme X és Z[i]  Eleme Y)  és\n\n\tHalmazE(Z)","\nMetszet(N,X,M,Y,Db,Z):\n\t[kiválogatás:]\n\tDb:= 0\n\tCiklus I = 1 - től N - ig\n\t\t[eldöntés:]\n\t\tJ:= 1\n\t\tCiklus amíg J<=M és X[I]≠Y[J]\n\t\t\tJ:= J + 1\n\t\tCiklus vége\n\t\tHa J<=M akkor \n\t\t\tDb:= Db + 1; Z[Db]:= X[I]\n\tCiklus vége\nEljárás vége." }, //metszet 
+			{"\nBemenet:\n\n\tN: Egész, X: Tömb[1..N:Valami]\n\nKimenet:\n\n\tDb: Egész, Y: Tömb[1..N:Egész]\n\nElőfeltétel:\n\n\tN>=0\n\nUtófeltétel:\n\n\tDb = SZUM(i = 1..N; T(X[i])) 1 és\n\n\tMinden i(1<=i<=Db): T(X[Y[i]])  és\n\n\tY Részhalmaz (1, 2, ...,N)","\nKiválogatás(N,X,Db,Y):\n\tDb:= 0\n\tCiklus I = 1 - től N - ig\n\t\tHa T(X[I]) akkor \n\t\t\tDb:= Db + 1; Y[Db]:= I\n\tCiklus vége\nEljárás vége." }, // kivalogatas
+			{"\nBemenet:\n\n\tN: Egész, X: Tömb[1..N:Valami]\n\nKimenet:\n\n\tX: Tömb[1..N:Valami]\n\nElőfeltétel:\n\n\tN>=0 és RendezettHalmazE(Valami)\n\nUtófeltétel:\n\n\tRendezettE(X’) és X’  Eleme Permutáció(X)","\nRendezés(N,X):\n\tCiklus I = 2 - től N - ig\n\t\tJ:= I - 1; Y:= X[I]\n\t\tCiklus amíg J > 0 és X[J]> Y\n\t\t\tX[J + 1]:= X[J]; J:= J - 1\n\t\tCiklus vége\n\t\tX[J + 1]:= Y\n\tCiklus vége\nEljárás vége." }, //beillesztésesrendezés
+			{"\nBemenet:\n\n\tN: Egész, X: Tömb[1..N:Valami]\n\nKimenet:\n\n\tX: Tömb[1..N:Valami]\n\nElőfeltétel:\n\n\tN>=0 és RendezettHalmazE(Valami)\n\nUtófeltétel:\n\n\tRendezettE(X’) és X’  Eleme Permutáció(X)","\nRendezés(N,X):\n\tCiklus I = 1 - től N - 1 - ig\n\t\tCiklus J = I + 1 - től N - ig\n\t\t\tHa X[I] > X[J] akkor \n\t\t\t\tCsere(X[I], X[J])\n\t\tCiklus vége\n\tCiklus vége\nEljárás vége." },//egyszerücserésrendezés
+			{"\nBemenet:\n\n\tN: Egész, X: Tömb[1..N:Valami], Y: Valami,\n\n\tT: Valami→Logikai\n\nKimenet:\n\n\tVAN: Logikai, SORSZ: Egész\n\nElőfeltétel:\n\n\tN>=0 és RendezettE(X)\n\nUtófeltétel:\n\n\tVAN akkor igaz, ha (Van olyan i(1<=i<=N): X[i] = Y) és\n\n\tVAN → 1<=SORSZ<=N és X[SORSZ] = Y és\n\n\tMinden i(1<=i < SORSZ): X[i] < Y","\nKeresés(N,X,Y,VAN,SORSZ):\n\tI:= 1\n\tCiklus amíg I<=N és X[I] < Y\n\t\tI:= I + 1\n\tCiklus vége\n\tVAN:= (I<=N) és X[I] = Y\n\tHa VAN akkor \n\t\tSORSZ:= I\nEljárás vége." },//Lineáris keresés rendezett halmazban
+			{"\nBemenet:\n\n\tN: Egész, X: Tömb[1..N:Valami], Y: Valami,\n\n\tT: Valami→Logikai\n\nKimenet:\n\n\tVAN: Logikai, SORSZ: Egész\n\nElőfeltétel:\n\n\tN>=0 és RendezettE(X)\n\nUtófeltétel:\n\n\tVAN akkor igaz, ha (Van olyan i(1<=i<=N): X[i] = Y) és\n\n\tVAN → 1<=SORSZ<=N és X[SORSZ] = Y és\n\n\tMinden i(1<=i < SORSZ):X[i]<=Y és Minden i(SORSZ < i<=N): X[i]>=Y","\nKeresés(N,X,Y,VAN,SORSZ):\n\tE:= 1; U:= N\n\tCiklus\n\t\tK:=[(E + U) / 2]  (E + U felének egész értéke)\n\t\tElágazás\n\t\t\tY < X[K] esetén U:= K - 1\n\t\t\tY > X[K] esetén E:= K + 1\n\t\tElágazás vége\n\tamíg E<=U és X[K] ? Y\n\tCiklus vége\n\tVAN:= (E<=U)\n\tHa VAN akkor SORSZ:= K\nEljárás vége." } // bináris keresés (logaritmikus)
 			}; //data[x,y] x=tételek specifikációja, y=algoritmusa
 
         static string[] dataarray = { " ", "1] Specifikáció", "2] Algoritmus/Pszeudo kód", "3] Mintaprogram", "4] Vissza", "5] Kilépés" };
@@ -50,13 +50,12 @@ namespace menü_fr
         {
             Console.SetWindowSize(128, 32);
             Console.Title = "Programozástételek";
-            UTF8Encoding uTF8 = new UTF8Encoding();
         }
         static void arrowNav(Action[] methods_in, string[] menudata) //nyílvezérelt menü, amely a kiválasztható eljárásokat, és a menüpontok szövegét kapja paraméternek
         {
             Console.CursorVisible = false;
             int valasztott = 1;
-            Console.BackgroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Gray;
             Console.ForegroundColor = ConsoleColor.Black;
             Console.SetCursorPosition(0, valasztott);
             Console.Write(menudata[valasztott]);
@@ -74,7 +73,7 @@ namespace menü_fr
                             valasztott -= 1;
                         }
 
-                        Console.BackgroundColor = ConsoleColor.White; //a menüpontok kiszínezése
+                        Console.BackgroundColor = ConsoleColor.Gray; //a menüpontok kiszínezése
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.SetCursorPosition(0, valasztott);
                         Console.Write("{0}", menudata[valasztott]);
@@ -89,7 +88,7 @@ namespace menü_fr
                         {
                             valasztott += 1;
                         }
-                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.BackgroundColor = ConsoleColor.Gray;
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.SetCursorPosition(0, valasztott);
                         Console.Write("{0}", menudata[valasztott]);
@@ -100,7 +99,7 @@ namespace menü_fr
                         break;
                     case ConsoleKey.Escape:
                         Console.ResetColor();
-                        Exit();
+                        ExitB();
                         break;
                     case ConsoleKey.Enter:
                         Console.ResetColor();
@@ -117,8 +116,9 @@ namespace menü_fr
         static void Menu() //főmenü
         {
             Console.Clear();
-
-            Console.WriteLine("Fő-Menü");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("FőMenü");
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("1] Elemi programozástételek\n2] Összett programozástételek\n3] Rendezések\n4] Keresések\n5] Kilépés");
             string[] menudata = { "Fő-Menü", "1] Elemi programozástételek", "2] Összett programozástételek", "3] Rendezések", "4] Keresések", "5] Kilépés" };
             Action[] funcs = { ElemiAlmenu, OsszetettAlmenu, RendezesekAlmenu, KeresesekAlmenu, Exit };
@@ -199,9 +199,15 @@ namespace menü_fr
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[0]);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Írjon be számokat (szóközzel elválasztva) és a program megkeresi a legnagyobbat");
+            Console.WriteLine("A 'vissza' beírásával léphet ki!\n");
+            Console.Write("Elemek: ");
             string[] tomb = Console.ReadLine().Split(' ');
+            if (exitargs.Contains(tomb[0]))
+            {
+                MaxMinta();
+            }
             int[] X = new int[tomb.Length];
             try
             {
@@ -224,9 +230,10 @@ namespace menü_fr
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[0]);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Adja meg az adathalmaz elérési útvonalát!");
-            Console.WriteLine("A 'vissza' beírásával léphet ki!");
+            Console.WriteLine("A 'vissza' beírásával léphet ki!\n");
+            Console.Write("Útvonal: ");
             string url = Console.ReadLine();
             FileInputUsermanagement(MaxMinta, Maxfilebol, url);
             StreamReader file = new StreamReader(url);
@@ -290,11 +297,17 @@ namespace menü_fr
         }
         static void Megszamolbeir() {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[1]);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Írjon be adatokat (szóközökkel elválasztva)");
+            Console.WriteLine("A 'vissza' beírásával léphet ki!\n");
+            Console.Write("Adatok: ");
             string[] X = Console.ReadLine().Split(' ');
+            if (exitargs.Contains(X[0]))
+            {
+                MegszamolMinta();
+            }
             Console.WriteLine("Íjron be egy adatot, a program megszámolja, hogy hányszor szerepel az előbbi adathalmazban");
             string keresett = Console.ReadLine();
             FuncMegszamol(X, X.Length, keresett);
@@ -305,9 +318,10 @@ namespace menü_fr
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[1]);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Adja meg az adathalmaz elérési útvonalát!");
-            Console.WriteLine("A 'vissza' beírásával léphet ki!");
+            Console.WriteLine("A 'vissza' beírásával léphet ki!\n");
+            Console.Write("Útvonal: ");
             string url = Console.ReadLine();
             FileInputUsermanagement(MegszamolMinta, Megszamolfilebol, url);
             StreamReader file = new StreamReader(url);
@@ -378,9 +392,15 @@ namespace menü_fr
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[2]);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Írja be az egyik tömb elemeit (szóközökkel elválasztva)");
+            Console.WriteLine("A 'vissza' beírásával léphet ki!\n");
+            Console.Write("Elemek: ");
             string[] X_beker = Console.ReadLine().Split(' ');
+            if (exitargs.Contains(X_beker[0]))
+            {
+                MetszetMinta();
+            }
             string[] X = new string[X_beker.Length];
             try
             {
@@ -421,9 +441,10 @@ namespace menü_fr
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[2]);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Adja meg az adathalmaz elérési útvonalát! (két halmaz elemei két sorban, szóközzel elválasztva)");
-            Console.WriteLine("A 'vissza' beírásával léphet ki!");
+            Console.WriteLine("A 'vissza' beírásával léphet ki!\n");
+            Console.Write("Útvonal: ");
             string url = Console.ReadLine();
             FileInputUsermanagement(MetszetMinta, Metszetfilebol, url);
             StreamReader file = new StreamReader(url);
@@ -507,9 +528,15 @@ namespace menü_fr
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[3]);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Írjon be számokat (szóközökkel elválasztva), a program kiválogatja a 10-nél nagyobbakat");
+            Console.WriteLine("A 'vissza' beírásával léphet ki!\n");
+            Console.Write("Számok: ");
             string[] X_beker = Console.ReadLine().Split(' ');
+            if (exitargs.Contains(X_beker[0]))
+            {
+                KivalogatasMinta();
+            }
             int[] X = new int[X_beker.Length];
             try
             {
@@ -532,9 +559,10 @@ namespace menü_fr
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[3]);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Adja meg az adathalmaz elérési útvonalát, a program kiválogatja a 10-nél nagyobbakat! (számok szóközökkel elválasztva)");
-            Console.WriteLine("A 'vissza' beírásával léphet ki!");
+            Console.WriteLine("A 'vissza' beírásával léphet ki!\n");
+            Console.Write("Útvonal: ");
             string url = Console.ReadLine();
             FileInputUsermanagement(KivalogatasMinta, Kivalogatasfilebol, url);
             StreamReader file = new StreamReader(url);
@@ -616,9 +644,15 @@ namespace menü_fr
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[4]);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Írjon be számokat (szóközökkel elválasztva), a program rendezi ezeket");
+            Console.WriteLine("A 'vissza' beírásával léphet ki!\n");
+            Console.Write("Számok: ");
             string[] X_beker = Console.ReadLine().Split(' ');
+            if (exitargs.Contains(X_beker[0]))
+            {
+                EgyszerucseresMinta();
+            }
             int[] X = new int[X_beker.Length];
             try
             {
@@ -642,9 +676,10 @@ namespace menü_fr
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[4]);
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Adja meg az adathalmaz elérési útvonalát, a program kiválogatja a 10-nél nagyobbakat! (számok szóközökkel elválasztva)");
-            Console.WriteLine("A 'vissza' beírásával léphet ki!");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine("Adja meg az adathalmaz elérési útvonalát, a program rendezi a számokat! (számok szóközökkel elválasztva)");
+            Console.WriteLine("A 'vissza' beírásával léphet ki!\n");
+            Console.Write("Útvonal: ");
             string url = Console.ReadLine();
             FileInputUsermanagement(EgyszerucseresMinta, Egyszerucseresfilebol, url);
             StreamReader file = new StreamReader(url);
@@ -725,9 +760,15 @@ namespace menü_fr
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[5]);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Írjon be számokat (szóközökkel elválasztva), a program rendezi ezeket");
+            Console.WriteLine("A 'vissza' beírásával léphet ki!\n");
+            Console.Write("Számok: ");
             string[] X_beker = Console.ReadLine().Split(' ');
+            if (exitargs.Contains(X_beker[0]))
+            {
+                BeillesztesesrendezesMinta();
+            }
             int[] X = new int[X_beker.Length];
             try
             {
@@ -752,10 +793,9 @@ namespace menü_fr
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[5]);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Adja meg az adathalmaz elérési útvonalát, a program rendezi a számokat (számok szóközökkel elválasztva)");
-            Console.WriteLine("A 'vissza' beírásával léphet ki!");
-            Console.WriteLine();
+            Console.WriteLine("A 'vissza' beírásával léphet ki!\n");
             Console.Write("Útvonal: ");
             string url = Console.ReadLine();
             Console.WriteLine();
@@ -781,7 +821,7 @@ namespace menü_fr
             {
                 int j = i - 1;
                 int y = X[i];
-                while(j > 0 && X[j] > y)
+                while(j >= 0 && X[j] > y)
                 {
                     X[j + 1] = X[j];
                     j--;
@@ -796,7 +836,7 @@ namespace menü_fr
             {
                 Console.Write("{0}, ", X[i]);
             }
-            Console.WriteLine("\nA renezés {0} miliszekundum alatt ment végbe", ts.TotalMilliseconds);
+            Console.WriteLine("\nA rendezés {0} miliszekundum alatt ment végbe", ts.TotalMilliseconds);
             Console.WriteLine();
         }
         static void KeresesekAlmenu()
@@ -845,9 +885,15 @@ namespace menü_fr
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[6]);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Írjon be számokat rendezett sorozatban (szóközökkel elválasztva)!");
+            Console.WriteLine("A 'vissza' beírásával léphet ki!\n");
+            Console.Write("Számok: ");
             string[] X_beker = Console.ReadLine().Split(' ');
+            if (exitargs.Contains(X_beker[0]))
+            {
+                LineariskeresesMinta();
+            }
             int[] X = new int[X_beker.Length];
             try
             {
@@ -885,9 +931,10 @@ namespace menü_fr
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[6]);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Adja meg a rendezett adathalmaz elérési útvonalát!");
-            Console.WriteLine("A 'vissza' beírásával léphet ki!");
+            Console.WriteLine("A 'vissza' beírásával léphet ki!\n");
+            Console.Write("Útvonal: ");
             string url = Console.ReadLine();
             FileInputUsermanagement(LineariskeresesMinta, Linearisfilebol, url);
             StreamReader file = new StreamReader(url);
@@ -975,9 +1022,15 @@ namespace menü_fr
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[7]);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Írjon be számokat rendezett sorozatban (szóközökkel elválasztva)!");
+            Console.WriteLine("A 'vissza' beírásával léphet ki!\n");
+            Console.Write("Számok: ");
             string[] X_beker = Console.ReadLine().Split(' ');
+            if (exitargs.Contains(X_beker[0]))
+            {
+                BinariskeresesMinta();
+            }
             int[] X = new int[X_beker.Length];
             try
             {
@@ -1014,9 +1067,10 @@ namespace menü_fr
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(mintak[7]);
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("Adja meg a rendezett adathalmaz elérési útvonalát!");
-            Console.WriteLine("A 'vissza' beírásával léphet ki!");
+            Console.WriteLine("A 'vissza' beírásával léphet ki!\n");
+            Console.Write("Útvonal: ");
             string url = Console.ReadLine();
             FileInputUsermanagement(BinariskeresesMinta, Binarisfilebol, url);
             StreamReader file = new StreamReader(url);
@@ -1079,7 +1133,35 @@ namespace menü_fr
 		static void Exit() //Kilépés a programból, elköszönő üzenet
 		{
 			Console.Clear();
-            using(StringReader reader = new StringReader(@"
+			
+				using(StringReader reader = new StringReader(@"
+ 
+
+                             █▓ 
+ ██▒   █▓ ██▓  ██████ ▒███████▒ ██▓    ▄▄▄     ▄▄▄█████▓
+▓██░   █▒▓██▒▒██    ▒ ▒ ▒ ▒ ▄▀░▓██▒   ▒████▄   ▓  ██▒ ▓▒
+ ▓██  █▒░▒██▒░ ▓██▄   ░ ▒ ▄▀▒░ ▒██░   ▒██  ▀█▄ ▒ ▓██░ ▒░
+  ▒██ █░░░██░  ▒   ██▒  ▄▀▒   ░▒██░   ░██▄▄▄▄██░ ▓██▓ ░ 
+   ▒▀█░  ░██░▒██████▒▒▒███████▒░██████▒▓█   ▓██▒ ▒██▒ ░ 
+   ░ █░  ░▓  ▒ ▒▓▒ ▒ ░░▒▒ ▓░▒░▒░ ▒░▓  ░▒▒   ▓▒█░ ▒ ░░   
+   ░ ░░   ▒ ░░ ░▒  ░ ░░░▒ ▒ ░ ▒░ ░ ▒  ░ ▒   ▒▒ ░   ░    
+     ░░   ▒ ░░  ░  ░  ░ ░ ░ ░ ░  ░ ░    ░   ▒    ░      
+      ░   ░        ░    ░ ░        ░  ░     ░  ░        
+     ░                ░                                 ")) {
+					string line = string.Empty;
+					do {
+						line = reader.ReadLine();
+						if(line != null) {
+							Console.SetCursorPosition((Console.WindowWidth - line.Length) / 2, Console.CursorTop);
+							Console.ForegroundColor = ConsoleColor.DarkCyan;
+							Console.WriteLine(line);
+							Console.ForegroundColor = ConsoleColor.Gray;
+						}
+					} while(line != null);
+				}
+
+			
+			/*using(StringReader reader = new StringReader(@"
 
 
 ─▄█▀▀║░▄█▀▄║▄█▀▄║██▀▄║─
@@ -1088,24 +1170,36 @@ namespace menü_fr
 ───────────────────────
 ───██▀▄─ ▀▄─▄▀ █▀▀──█───
 ───██▀▀▄ ──█── █▀▀──▀───
-───██▄▄▀ ──▀── ▀▀▀──▄───"))
-            {
-                string line = string.Empty;
-                do
-                {
-                    line = reader.ReadLine();
-                    if(line != null)
-                    {
-                        Console.SetCursorPosition((Console.WindowWidth - line.Length) / 2, Console.CursorTop);
-                        Console.ForegroundColor = ConsoleColor.DarkCyan;
-                        Console.WriteLine(line);
-                        Console.ForegroundColor = ConsoleColor.White;
-                    }
-                } while(line != null);
-            }
-            
-            
-            System.Threading.Thread.Sleep(1000);
+───██▄▄▀ ──▀── ▀▀▀──▄───"))*/
+
+			System.Threading.Thread.Sleep(1000);
+			System.Environment.Exit(0);
+		}
+		static void ExitB() 
+		{
+			Console.Clear();
+
+			using(StringReader reader = new StringReader(@"
+
+
+     _______.________   ___________    ____  ___           _______.________  
+    /       |       /  |   ____\   \  /   / /   \         /       |       /  
+   |   (----`---/  /   |  |__   \   \/   / /  ^  \       |   (----`---/  /   
+    \   \      /  /    |   __|   \      / /  /_\  \       \   \      /  /    
+.----)   |    /  /----.|  |____   \    / /  _____  \  .----)   |    /  /----.
+|_______/    /________||_______|   \__/ /__/     \__\ |_______/    /________|")) {
+				string line = string.Empty;
+				do {
+					line = reader.ReadLine();
+					if(line != null) {
+						Console.SetCursorPosition((Console.WindowWidth - line.Length) / 2, Console.CursorTop);
+						Console.ForegroundColor = ConsoleColor.DarkCyan;
+						Console.WriteLine(line);
+						Console.ForegroundColor = ConsoleColor.Gray;
+					}
+				} while(line != null);
+			}
+			System.Threading.Thread.Sleep(1000);
 			System.Environment.Exit(0);
 		}
         
